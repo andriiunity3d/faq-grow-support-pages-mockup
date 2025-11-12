@@ -3,59 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search Results</title>
+    <title>Search Results - Unity Support</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <!-- ... same header as index.html ... -->
+    <header class="header">
+        <div class="logo">
+            <img src="https://support.unity.com/hc/theming_assets/01HZF349MKM41F492W52Q8S1MN" alt="Unity Logo">
+        </div>
+        <nav class="header-nav">
+            <!-- User controls will be injected by JavaScript -->
+        </nav>
     </header>
 
-    <main>
-        <div class="breadcrumbs">
-            <a href="../index.html">Home</a> &gt; Search Results
-        </div>
+    <div class="main-container page-container">
+        <aside class="sidebar">
+            <h3>Filter by Category</h3>
+            <ul>
+                <li><a href="#">All Categories (10)</a></li>
+                <li><a href="#">LevelPlay (5)</a></li>
+                <li><a href="#">UnityAds (3)</a></li>
+                <li><a href="#">Accounts (2)</a></li>
+            </ul>
+        </aside>
 
-        <section class="search-results-content">
-            <aside class="categories">
-                <h3>Categories</h3>
-                <ul>
-                    <li><a href="#">LevelPlay (5)</a></li>
-                    <li><a href="#">UnityAds (3)</a></li>
-                    <li><a href="#">General (2)</a></li>
-                </ul>
-            </aside>
-
-            <div class="results">
-                <div class="ai-answer">
-                    <h3>AI Suggestion</h3>
-                    <p>To integrate the SDK, you need to follow the steps in our official documentation...</p>
-                    <small>AI suggestion based on: <a href="article.html">How to integrate the SDK</a></small>
-                    <div class="feedback">
-                        <button>Like</button>
-                        <button>Dislike</button>
-                    </div>
-                </div>
-
-                <h2>10 results for 'SDK integration' in All Categories</h2>
-
-                <div class="article-result">
-                    <h3><a href="article.html">How to integrate the SDK</a></h3>
-                    <p>...This article provides a step-by-step guide on SDK integration...</p>
-                    <div class="article-meta">
-                        <span>Likes: 150</span>
-                        <span>Updated on Nov 10, 2025</span>
-                    </div>
-                </div>
-                <!-- ... more results ... -->
+        <main class="main-content">
+            <div class="breadcrumbs">
+                <a href="../index.html">Support Home</a> &gt; Search Results
             </div>
-        </section>
-    </main>
+            
+            <h2>10 results for 'SDK integration'</h2>
 
-    <!-- Footer -->
+            <div class="ai-answer-box">
+                <h3>AI Suggestion</h3>
+                <p>To integrate the SDK, you need to follow the steps in our official documentation, which includes adding the SDK to your project dependencies and initializing it in your main application class.</p>
+                <small>Based on: <a href="article.html?id=6">How to integrate the IronSource SDK</a></small>
+                <div class="feedback" style="margin-top: 10px;">
+                    <button style="padding: 5px 10px;">👍</button>
+                    <button style="padding: 5px 10px;">👎</button>
+                </div>
+            </div>
+
+            <section class="article-list">
+                <div class="article-list-item">
+                    <h3><a href="article.html?id=6">How to integrate the IronSource SDK</a></h3>
+                    <p>...Step-by-step instructions for a successful <b>SDK integration</b> on iOS and Android. This article covers dependencies and required adapter initializations...</p>
+                    <div class="article-meta">Likes: 198 | Updated on Nov 10, 2025</div>
+                </div>
+                <div class="article-list-item">
+                    <h3><a href="article.html?id=10">Migrating to the new UnityAds SDK</a></h3>
+                    <p>...A guide for developers migrating from older versions of the UnityAds SDK. This includes API changes and new required frameworks for the <b>SDK integration</b>...</p>
+                    <div class="article-meta">Likes: 160 | Updated on Oct 22, 2025</div>
+                </div>
+                <div class="article-list-item">
+                    <h3><a href="article.html?id=15">Debugging Common SDK Issues</a></h3>
+                    <p>...A troubleshooting guide for common issues encountered during <b>SDK integration</b>. Check logs for common error messages...</p>
+                    <div class="article-meta">Likes: 90 | Updated on Sep 20, 2025</div>
+                </div>
+            </section>
+        </main>
+    </div>
+
     <footer>
-        <!-- ... same footer as index.html ... -->
+        <p>&copy; 2025 Unity Technologies</p>
     </footer>
+
+    <script src="../js/data.js"></script>
+    <script src="../js/main.js"></script>
 </body>
 </html>
