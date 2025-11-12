@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Article Page</title>
+    <title>Article Page - Unity Support</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
@@ -12,8 +12,7 @@
             <img src="https://support.unity.com/hc/theming_assets/01HZF349MKM41F492W52Q8S1MN" alt="Unity Logo">
         </div>
         <nav class="header-nav">
-            <a href="#" class="btn-submit">Submit a request</a>
-            <a href="#">Sign in</a>
+            <!-- User controls will be injected by JavaScript -->
         </nav>
     </header>
 
@@ -28,6 +27,11 @@
                 <li><a href="#">Understanding Your Invoice</a></li>
                 <li><a href="#">Deleting Your Account</a></li>
             </ul>
+
+            <h3 style="margin-top: 30px;">Recently viewed</h3>
+            <ul class="recently-viewed-list">
+                <!-- Recently viewed articles injected by JS -->
+            </ul>
         </aside>
 
         <main class="main-content">
@@ -37,20 +41,12 @@
             
             <article>
                 <header class="article-header">
-                    <h1>How to Sign Out of Your Unity Account on All Devices</h1>
-                    <p class="article-meta">Updated on Nov 8, 2025</p>
+                    <h1>Article Title Loading...</h1>
+                    <p class="article-meta">Created / Updated on...</p>
                 </header>
 
-                <div class="article-content">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    <h3>Step-by-Step Guide</h3>
-                    <ol>
-                        <li>Navigate to your Account Settings page.</li>
-                        <li>Click on the 'Security' tab.</li>
-                        <li>Find the 'Active Sessions' section.</li>
-                        <li>Click the 'Sign out everywhere' button.</li>
-                    </ol>
+                <div class="article-content main-article-content">
+                    <p>Loading article content...</p>
                 </div>
             </article>
 
@@ -58,8 +54,12 @@
                 <p>Was this article helpful?</p>
                 <button id="yes-btn">Yes</button>
                 <button id="no-btn">No</button>
-                <p><small><span id="helpful-count">150</span> found this article helpful</small></p>
+                <p><small><span id="helpful-count">0</span> found this article helpful</small></p>
             </section>
+
+            <div style="text-align: center; margin-top: 20px;">
+                <p>Have more questions? <a href="https://support-ads.unity.com/s/ContactUs">Submit a request</a></p>
+            </div>
         </main>
     </div>
 
@@ -67,8 +67,16 @@
         <p>&copy; 2025 Unity Technologies</p>
     </footer>
     
+    <div id="feedback-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>What was wrong with this article?</h2>
+            <textarea placeholder="Your feedback helps us improve our support resources..."></textarea>
+            <button>Submit Feedback</button>
+        </div>
+    </div>
+
+    <script src="../js/data.js"></script>
     <script src="../js/main.js"></script>
 </body>
-</html>```
-
-The `search-results.html`, `admin.html`, and `js/main.js` files can remain the same as in the previous version, as this update primarily focuses on the visual design and layout of the public-facing pages. With these changes, your portal will now have a look and feel that is much closer to the target website.
+</html>
