@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LevelPlay Mediation - Unity Support</title>
+    <title>Article Page - Unity Support</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
@@ -16,70 +16,49 @@
         </nav>
     </header>
 
-    <div class="main-container">
-        <main class="main-content" style="width: 100%;">
+    <div class="main-container page-container">
+        <aside class="sidebar">
+            <h3>Articles in this section</h3>
+            <ul>
+                <li><a href="#">How to Sign Out of Your Unity Account</a></li>
+                <li><a href="#">Managing Your Organization</a></li>
+                <li><a href="#">Updating Your Email Address</a></li>
+                <li><a href="#">Two-Factor Authentication</a></li>
+                <li><a href="#">Understanding Your Invoice</a></li>
+                <li><a href="#">Deleting Your Account</a></li>
+            </ul>
+
+            <h3 style="margin-top: 30px;">Recently viewed</h3>
+            <ul class="recently-viewed-list">
+                <!-- Recently viewed articles injected by JS -->
+            </ul>
+        </aside>
+
+        <main class="main-content">
             <div class="breadcrumbs">
-                <a href="../index.html">Support Home</a> &gt; LevelPlay Mediation
+                <a href="../index.html">Support Home</a> &gt; <a href="#">Accounts</a>
             </div>
             
-            <header class="article-header">
-                <h1>LevelPlay Mediation</h1>
-                <p>Articles and guides for the LevelPlay mediation solution.</p>
-            </header>
+            <article>
+                <header class="article-header">
+                    <h1>Article Title Loading...</h1>
+                    <p class="article-meta">Created / Updated on...</p>
+                </header>
 
-            <div class="search-bar" style="margin-bottom: 40px;">
-                <input type="text" placeholder="Search within this category...">
-            </div>
+                <div class="article-content main-article-content">
+                    <p>Loading article content...</p>
+                </div>
+            </article>
 
-            <div class="collapsible-section">
-                <div class="section-header">
-                    <h3>General & Account</h3>
-                    <span class="toggle-btn">+</span>
-                </div>
-                <div class="section-content">
-                    <ul>
-                        <li><a href="article.html?id=4">LevelPlay Account Security</a></li>
-                        <li><a href="#">Managing User Permissions</a></li>
-                        <li><a href="#">Understanding Your Dashboard</a></li>
-                        <li><a href="#">Setting Up Payment Information</a></li>
-                        <li><a href="#">Contacting Support</a></li>
-                    </ul>
-                    <a href="articles-list.html" class="see-all-link">See all 10 articles</a>
-                </div>
-            </div>
+            <section class="helpful-section">
+                <p>Was this article helpful?</p>
+                <button id="yes-btn">Yes</button>
+                <button id="no-btn">No</button>
+                <p><small><span id="helpful-count">0</span> found this article helpful</small></p>
+            </section>
 
-            <div class="collapsible-section">
-                <div class="section-header">
-                    <h3>Platform</h3>
-                    <span class="toggle-btn">+</span>
-                </div>
-                <div class="section-content">
-                     <ul>
-                        <li><a href="article.html?id=2">How to Add Ad Sources</a></li>
-                        <li><a href="article.html?id=3">Understanding Mediation Groups</a></li>
-                        <li><a href="article.html?id=17">A/B Testing Best Practices</a></li>
-                        <li><a href="#">Using the Reporting Dashboard</a></li>
-                        <li><a href="#">Setting Up Ad Units</a></li>
-                    </ul>
-                    <a href="articles-list.html" class="see-all-link">See all 15 articles</a>
-                </div>
-            </div>
-
-            <div class="collapsible-section">
-                <div class="section-header">
-                    <h3>SDK</h3>
-                    <span class="toggle-btn">+</span>
-                </div>
-                <div class="section-content">
-                    <ul>
-                        <li><a href="article.html?id=1">Getting Started with LevelPlay</a></li>
-                        <li><a href="article.html?id=5">Advanced SDK Features</a></li>
-                        <li><a href="article.html?id=15">Debugging Common SDK Issues</a></li>
-                        <li><a href="#">iOS Integration Guide</a></li>
-                        <li><a href="#">Android Integration Guide</a></li>
-                    </ul>
-                    <a href="articles-list.html" class="see-all-link">See all 12 articles</a>
-                </div>
+            <div style="text-align: center; margin-top: 20px;">
+                <p>Have more questions? <a href="https://support-ads.unity.com/s/ContactUs">Submit a request</a></p>
             </div>
         </main>
     </div>
@@ -88,6 +67,15 @@
         <p>&copy; 2025 Unity Technologies</p>
     </footer>
     
+    <div id="feedback-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>What was wrong with this article?</h2>
+            <textarea placeholder="Your feedback helps us improve our support resources..."></textarea>
+            <button>Submit Feedback</button>
+        </div>
+    </div>
+
     <script src="../js/data.js"></script>
     <script src="../js/main.js"></script>
 </body>
