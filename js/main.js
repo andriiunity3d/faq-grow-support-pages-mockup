@@ -1,20 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
     // --- Mock Login State ---
-    let loggedIn = false; // This variable controls the header buttons. false = show "Sign in"
+    // Check localStorage to persist login state across pages
+    let loggedIn = localStorage.getItem('loggedIn') === 'true' || false;
     const headerNav = document.querySelector('.header-nav');
     if (headerNav) {
-        // This toggle is for demonstration purposes so you can see both logged-in and logged-out states.
-        const loginToggle = document.createElement('a');
-        loginToggle.href = '#';
-        loginToggle.textContent = 'Toggle Login';
-        loginToggle.style.marginLeft = '20px';
-        loginToggle.style.color = '#ffc107'; // A distinct color for the demo toggle
-        headerNav.appendChild(loginToggle);
-        loginToggle.addEventListener('click', (e) => {
-            e.preventDefault();
-            loggedIn = !loggedIn;
-            renderHeader();
-        });
         renderHeader(); // Initial render on page load
     }
 
@@ -28,14 +17,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (loggedIn) {
             // LOGGED-IN STATE: Shows user icon and menu
+            const urlPath = window.location.pathname.includes('/pages/') ? '' : 'pages/';
             controls.innerHTML = `
                 <a href="https://support-ads.unity.com/s/ContactUs" class="btn-submit">Submit a request</a>
+                <a href="${urlPath}my-requests.html" class="btn-submit">My Requests</a>
                 <div class="user-menu" style="display: inline-block; position: relative; margin-left: 15px; vertical-align: middle;">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3wks2s_c2k-J3f2T2lZ-D9z5G3g_y_8J5g&s" alt="User Icon" class="user-icon" style="height: 30px; cursor: pointer; border-radius: 50%;">
+                    <div class="user-icon" style="width: 30px; height: 30px; border-radius: 50%; background-color: #007bff; cursor: pointer; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 14px;">U</div>
                     <div class="dropdown-content" style="display: none; position: absolute; right: 0; background-color: #fff; color: #333; min-width: 160px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 10; border-radius: 5px;">
-                        <a href="https://support-ads.unity.com/s/cases" style="color: black; padding: 12px 16px; text-decoration: none; display: block;">My activities</a>
-                        <a href="#" style="color: black; padding: 12px 16px; text-decoration: none; display: block;">My profile</a>
-                        <a href="#" style="color: black; padding: 12px 16px; text-decoration: none; display: block;">Sign out</a>
+                        <a href="#" id="sign-out-btn" style="color: black; padding: 12px 16px; text-decoration: none; display: block;">Sign out</a>
                     </div>
                 </div>
             `;
@@ -45,13 +34,39 @@ document.addEventListener('DOMContentLoaded', () => {
             userMenu.addEventListener('click', () => {
                 dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
             });
+            // Add sign out functionality
+            const signOutBtn = headerNav.querySelector('#sign-out-btn');
+            if (signOutBtn) {
+                signOutBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    loggedIn = false;
+                    localStorage.setItem('loggedIn', 'false');
+                    // If on My Requests page, redirect to home
+                    if (window.location.pathname.includes('my-requests.html')) {
+                        const homePath = window.location.pathname.includes('/pages/') ? '../index.html' : 'index.html';
+                        window.location.href = homePath;
+                    } else {
+                        renderHeader();
+                    }
+                });
+            }
         } else {
             // LOGGED-OUT STATE: Shows "Sign in" and "Submit a request" buttons
             controls.innerHTML = `
                 <a href="https://support-ads.unity.com/s/ContactUs" class="btn-submit">Submit a request</a>
-                <a href="#">Sign in</a>
+                <a href="#" id="sign-in-btn">Sign in</a>
             `;
             headerNav.prepend(controls);
+            // Add toggle functionality to Sign In button
+            const signInBtn = headerNav.querySelector('#sign-in-btn');
+            if (signInBtn) {
+                signInBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    loggedIn = !loggedIn;
+                    localStorage.setItem('loggedIn', loggedIn.toString());
+                    renderHeader();
+                });
+            }
         }
     }
 
@@ -62,8 +77,16 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!modal) {
             modal = document.createElement('div');
             modal.className = 'search-modal';
-            searchBar.parentElement.appendChild(modal);
-            modal.style.cssText = 'position: absolute; background: white; width: 62%; left: 19%; border: 1px solid #ccc; border-top: none; box-shadow: 0 5px 10px rgba(0,0,0,0.1); z-index: 100; text-align: left; border-radius: 0 0 5px 5px;';
+            const searchBarContainer = searchBar.closest('.search-bar');
+            searchBarContainer.style.position = 'relative';
+            searchBarContainer.appendChild(modal);
+            // Check if search bar is in breadcrumbs (inline) or hero section
+            const isInline = searchBarContainer.closest('.breadcrumbs');
+            if (isInline) {
+                modal.style.cssText = 'position: absolute; background: white; width: 100%; top: 100%; left: 0; border: 1px solid #ccc; border-top: none; box-shadow: 0 5px 10px rgba(0,0,0,0.1); z-index: 100; text-align: left; border-radius: 0 0 5px 5px; margin-top: 5px;';
+            } else {
+                modal.style.cssText = 'position: absolute; background: white; width: 62%; left: 19%; border: 1px solid #ccc; border-top: none; box-shadow: 0 5px 10px rgba(0,0,0,0.1); z-index: 100; text-align: left; border-radius: 0 0 5px 5px;';
+            }
         }
 
         searchBar.addEventListener('keyup', (e) => {
@@ -84,8 +107,20 @@ document.addEventListener('DOMContentLoaded', () => {
                     const item = document.createElement('a');
                     const urlPath = window.location.pathname.includes('/pages/') ? '' : 'pages/';
                     item.href = `${urlPath}article.html?id=${r.id}`;
-                    item.textContent = r.title;
                     item.style.cssText = 'display: block; padding: 10px 15px; text-decoration: none; color: #333; border-bottom: 1px solid #f0f0f0;';
+                    
+                    // Create container for title and location
+                    const titleDiv = document.createElement('div');
+                    titleDiv.textContent = r.title;
+                    titleDiv.style.cssText = 'font-weight: 500; margin-bottom: 3px;';
+                    
+                    // Create location text (category > section)
+                    const locationDiv = document.createElement('div');
+                    locationDiv.textContent = `${r.category} > ${r.section}`;
+                    locationDiv.style.cssText = 'font-size: 0.85em; color: #888;';
+                    
+                    item.appendChild(titleDiv);
+                    item.appendChild(locationDiv);
                     modal.appendChild(item);
                 });
                 modal.style.display = 'block';
@@ -118,8 +153,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const header = section.querySelector('.section-header');
         const content = section.querySelector('.section-content');
         const toggleBtn = header.querySelector('.toggle-btn');
+        const sectionLink = header.querySelector('.section-link');
 
-        header.addEventListener('click', () => {
+        header.addEventListener('click', (e) => {
+            // If clicking the section link, let it navigate (don't toggle)
+            if (e.target.closest('.section-link')) {
+                return;
+            }
+            // If clicking the toggle button or header area, toggle expand/collapse
             const isExpanded = section.classList.toggle('expanded');
             content.style.display = isExpanded ? 'block' : 'none';
             toggleBtn.textContent = isExpanded ? '−' : '+';
@@ -139,6 +180,12 @@ document.addEventListener('DOMContentLoaded', () => {
             document.querySelector('.article-header .article-meta').textContent = `Updated on ${article.updated}`;
             articleContent.innerHTML = `<p>${article.content.replace(/\n/g, '</p><p>')}</p>`;
             document.getElementById('helpful-count').textContent = article.likes;
+
+            // Set "See more" button link
+            const seeMoreBtn = document.getElementById('see-more-section-btn');
+            if (seeMoreBtn) {
+                seeMoreBtn.href = `section-articles.html?category=${encodeURIComponent(article.category)}&section=${encodeURIComponent(article.section)}`;
+            }
 
             // Track recently viewed
             let recentlyViewed = JSON.parse(localStorage.getItem('recentlyViewed')) || [];

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Requests - Unity Support</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <a href="../index.html"><img src="../images/u-logo.png" alt="Unity Logo"></a>
+        </div>
+        <nav class="header-nav">
+            <!-- User controls will be injected by JavaScript -->
+        </nav>
+    </header>
+
+    <div class="main-container">
+        <h1 style="margin-bottom: 30px;">My Requests</h1>
+
+        <!-- Filters Section -->
+        <div class="filters-section" style="background-color: #f8f9fa; padding: 20px; border-radius: 5px; margin-bottom: 30px; border: 1px solid #e0e0e0;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 15px;">
+                <div class="filter-group">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600; color: #333;">Status</label>
+                    <div class="filter-dropdown" style="position: relative;">
+                        <button class="filter-button" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; background-color: white; cursor: pointer; text-align: left;">
+                            <span id="status-text">2 Options Selected</span>
+                            <span style="float: right;">▼</span>
+                        </button>
+                        <div class="filter-dropdown-content" id="status-dropdown" style="display: none; position: absolute; top: 100%; left: 0; right: 0; background-color: white; border: 1px solid #ccc; border-radius: 5px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); z-index: 100; margin-top: 5px; padding: 10px;">
+                            <label style="display: block; padding: 5px 0;">
+                                <input type="checkbox" checked> Open
+                            </label>
+                            <label style="display: block; padding: 5px 0;">
+                                <input type="checkbox" checked> Pending
+                            </label>
+                            <label style="display: block; padding: 5px 0;">
+                                <input type="checkbox"> Closed
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600; color: #333;">Product Type</label>
+                    <div class="filter-dropdown" style="position: relative;">
+                        <button class="filter-button" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; background-color: white; cursor: pointer; text-align: left;">
+                            <span id="product-text">Select Product Types</span>
+                            <span style="float: right;">▼</span>
+                        </button>
+                        <div class="filter-dropdown-content" id="product-dropdown" style="display: none; position: absolute; top: 100%; left: 0; right: 0; background-color: white; border: 1px solid #ccc; border-radius: 5px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); z-index: 100; margin-top: 5px; padding: 10px;">
+                            <label style="display: block; padding: 5px 0;">
+                                <input type="checkbox"> LevelPlay
+                            </label>
+                            <label style="display: block; padding: 5px 0;">
+                                <input type="checkbox"> IronSource
+                            </label>
+                            <label style="display: block; padding: 5px 0;">
+                                <input type="checkbox"> UnityAds
+                            </label>
+                            <label style="display: block; padding: 5px 0;">
+                                <input type="checkbox"> Tapjoy
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600; color: #333;">Search</label>
+                    <input type="text" placeholder="Search" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box;">
+                </div>
+
+                <div class="filter-group">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600; color: #333;">Created</label>
+                    <input type="text" placeholder="dd.mm.yyyy" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box;">
+                </div>
+
+                <div class="filter-group">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600; color: #333;">Opened By</label>
+                    <div class="filter-dropdown" style="position: relative;">
+                        <button class="filter-button" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; background-color: white; cursor: pointer; text-align: left;">
+                            <span id="opened-by-text">Opened by me</span>
+                            <span style="float: right;">▼</span>
+                        </button>
+                        <div class="filter-dropdown-content" id="opened-by-dropdown" style="display: none; position: absolute; top: 100%; left: 0; right: 0; background-color: white; border: 1px solid #ccc; border-radius: 5px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); z-index: 100; margin-top: 5px; padding: 10px;">
+                            <label style="display: block; padding: 5px 0;">
+                                <input type="radio" name="opened-by" checked> Opened by me
+                            </label>
+                            <label style="display: block; padding: 5px 0;">
+                                <input type="radio" name="opened-by"> All requests
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tickets List -->
+        <div class="tickets-list">
+            <table class="tickets-table" style="width: 100%; border-collapse: collapse; background-color: white; border: 1px solid #e0e0e0; border-radius: 5px; overflow: hidden;">
+                <thead>
+                    <tr style="background-color: #f8f9fa; border-bottom: 2px solid #e0e0e0;">
+                        <th style="padding: 15px; text-align: left; font-weight: 600; color: #333;">Subject</th>
+                        <th style="padding: 15px; text-align: left; font-weight: 600; color: #333;">Product</th>
+                        <th style="padding: 15px; text-align: left; font-weight: 600; color: #333;">Status</th>
+                        <th style="padding: 15px; text-align: left; font-weight: 600; color: #333;">Created</th>
+                        <th style="padding: 15px; text-align: left; font-weight: 600; color: #333;">Last Updated</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="ticket-row" style="border-bottom: 1px solid #f0f0f0; cursor: pointer;" onclick="window.location.href='#'">
+                        <td style="padding: 15px;">
+                            <strong style="color: #007bff;">Issue with LevelPlay SDK initialization on Android</strong>
+                            <p style="margin: 5px 0 0 0; color: #666; font-size: 0.9em;">Getting error when trying to initialize LevelPlay SDK. The app crashes on startup.</p>
+                        </td>
+                        <td style="padding: 15px; color: #555;">LevelPlay</td>
+                        <td style="padding: 15px;">
+                            <span style="background-color: #6c757d; color: white; padding: 5px 10px; border-radius: 3px; font-size: 0.85em; font-weight: 600;">Open</span>
+                        </td>
+                        <td style="padding: 15px; color: #555;">15.11.2025</td>
+                        <td style="padding: 15px; color: #555;">18.11.2025</td>
+                    </tr>
+                    <tr class="ticket-row" style="border-bottom: 1px solid #f0f0f0; cursor: pointer;" onclick="window.location.href='#'">
+                        <td style="padding: 15px;">
+                            <strong style="color: #007bff;">Question about IronSource payment cycle and invoicing</strong>
+                            <p style="margin: 5px 0 0 0; color: #666; font-size: 0.9em;">When will I receive my payment? Need clarification on the payment schedule.</p>
+                        </td>
+                        <td style="padding: 15px; color: #555;">IronSource</td>
+                        <td style="padding: 15px;">
+                            <span style="background-color: #6c757d; color: white; padding: 5px 10px; border-radius: 3px; font-size: 0.85em; font-weight: 600;">Pending</span>
+                        </td>
+                        <td style="padding: 15px; color: #555;">12.11.2025</td>
+                        <td style="padding: 15px; color: #555;">16.11.2025</td>
+                    </tr>
+                    <tr class="ticket-row" style="border-bottom: 1px solid #f0f0f0; cursor: pointer;" onclick="window.location.href='#'">
+                        <td style="padding: 15px;">
+                            <strong style="color: #007bff;">Help optimizing UnityAds placement for better revenue</strong>
+                            <p style="margin: 5px 0 0 0; color: #666; font-size: 0.9em;">Looking for best practices on where to place rewarded ads in my game.</p>
+                        </td>
+                        <td style="padding: 15px; color: #555;">UnityAds</td>
+                        <td style="padding: 15px;">
+                            <span style="background-color: #6c757d; color: white; padding: 5px 10px; border-radius: 3px; font-size: 0.85em; font-weight: 600;">Open</span>
+                        </td>
+                        <td style="padding: 15px; color: #555;">10.11.2025</td>
+                        <td style="padding: 15px; color: #555;">14.11.2025</td>
+                    </tr>
+                    <tr class="ticket-row" style="border-bottom: 1px solid #f0f0f0; cursor: pointer;" onclick="window.location.href='#'">
+                        <td style="padding: 15px;">
+                            <strong style="color: #007bff;">Tapjoy Offerwall not displaying correctly on iOS</strong>
+                            <p style="margin: 5px 0 0 0; color: #666; font-size: 0.9em;">The offerwall appears blank after integration. Need assistance with setup.</p>
+                        </td>
+                        <td style="padding: 15px; color: #555;">Tapjoy</td>
+                        <td style="padding: 15px;">
+                            <span style="background-color: #6c757d; color: white; padding: 5px 10px; border-radius: 3px; font-size: 0.85em; font-weight: 600;">Closed</span>
+                        </td>
+                        <td style="padding: 15px; color: #555;">05.11.2025</td>
+                        <td style="padding: 15px; color: #555;">08.11.2025</td>
+                    </tr>
+                    <tr class="ticket-row" style="border-bottom: 1px solid #f0f0f0; cursor: pointer;" onclick="window.location.href='#'">
+                        <td style="padding: 15px;">
+                            <strong style="color: #007bff;">Configuration help for LevelPlay mediation groups</strong>
+                            <p style="margin: 5px 0 0 0; color: #666; font-size: 0.9em;">How to set up mediation groups for different user segments?</p>
+                        </td>
+                        <td style="padding: 15px; color: #555;">LevelPlay</td>
+                        <td style="padding: 15px;">
+                            <span style="background-color: #6c757d; color: white; padding: 5px 10px; border-radius: 3px; font-size: 0.85em; font-weight: 600;">Open</span>
+                        </td>
+                        <td style="padding: 15px; color: #555;">03.11.2025</td>
+                        <td style="padding: 15px; color: #555;">07.11.2025</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Unity Technologies</p>
+    </footer>
+
+    <script src="../js/data.js"></script>
+    <script src="../js/main.js"></script>
+    <script>
+        // Filter dropdown functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            const filterButtons = document.querySelectorAll('.filter-button');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const dropdown = button.nextElementSibling;
+                    const isVisible = dropdown.style.display === 'block';
+                    
+                    // Close all dropdowns
+                    document.querySelectorAll('.filter-dropdown-content').forEach(d => {
+                        d.style.display = 'none';
+                    });
+                    
+                    // Toggle current dropdown
+                    if (!isVisible) {
+                        dropdown.style.display = 'block';
+                    }
+                });
+            });
+
+            // Close dropdowns when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.filter-dropdown')) {
+                    document.querySelectorAll('.filter-dropdown-content').forEach(d => {
+                        d.style.display = 'none';
+                    });
+                }
+            });
+
+            // Update status text based on checkboxes
+            const statusCheckboxes = document.querySelectorAll('#status-dropdown input[type="checkbox"]');
+            statusCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', () => {
+                    const checked = Array.from(statusCheckboxes).filter(cb => cb.checked);
+                    const statusText = document.getElementById('status-text');
+                    if (checked.length === 0) {
+                        statusText.textContent = 'Click here';
+                    } else if (checked.length === statusCheckboxes.length) {
+                        statusText.textContent = 'All Selected';
+                    } else {
+                        statusText.textContent = `${checked.length} Options Selected`;
+                    }
+                });
+            });
+
+            // Update product text
+            const productCheckboxes = document.querySelectorAll('#product-dropdown input[type="checkbox"]');
+            productCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', () => {
+                    const checked = Array.from(productCheckboxes).filter(cb => cb.checked);
+                    const productText = document.getElementById('product-text');
+                    if (checked.length === 0) {
+                        productText.textContent = 'Select Product Types';
+                    } else if (checked.length === productCheckboxes.length) {
+                        productText.textContent = 'All Selected';
+                    } else {
+                        productText.textContent = `${checked.length} Selected`;
+                    }
+                });
+            });
+
+            // Update opened by text
+            const openedByRadios = document.querySelectorAll('#opened-by-dropdown input[type="radio"]');
+            openedByRadios.forEach(radio => {
+                radio.addEventListener('change', () => {
+                    const openedByText = document.getElementById('opened-by-text');
+                    openedByText.textContent = radio.parentElement.textContent.trim();
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
