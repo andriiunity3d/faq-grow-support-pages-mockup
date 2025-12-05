@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Section Articles - Unity Support</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <a href="../index.html"><img src="../images/u-logo.png" alt="Unity Logo"></a>
+        </div>
+        <nav class="header-nav">
+            <!-- User controls will be injected by JavaScript -->
+        </nav>
+    </header>
+
+    <div class="main-container">
+        <main class="main-content" style="width: 100%;">
+            <div class="breadcrumbs" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <div id="breadcrumb-content">
+                    <a href="../index.html">Support Home</a> &gt; <span id="category-name">Category</span> &gt; <span id="section-name">Section</span>
+                </div>
+                <div class="search-bar" style="width: 300px;">
+                    <input type="text" placeholder="Search for answers..." style="width: 100%; padding: 8px 15px; border: 1px solid #ccc; border-radius: 5px; font-size: 0.9em;">
+                </div>
+            </div>
+            
+            <header class="article-header">
+                <h1 id="section-title">Section Title</h1>
+            </header>
+
+            <div id="articles-grid" class="section-articles-grid">
+                <!-- Articles will be injected by JavaScript -->
+            </div>
+
+            <div id="pagination" class="pagination">
+                <!-- Pagination will be injected by JavaScript -->
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Unity Technologies</p>
+    </footer>
+    
+    <script src="../js/data.js"></script>
+    <script src="../js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Get URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const category = urlParams.get('category') || 'LevelPlay';
+            const section = urlParams.get('section') || 'SDK';
+            const page = parseInt(urlParams.get('page')) || 1;
+
+            // Update page title and breadcrumbs
+            document.getElementById('section-title').textContent = section;
+            document.getElementById('category-name').textContent = category;
+            document.getElementById('section-name').textContent = section;
+            document.title = `${section} - ${category} - Unity Support`;
+
+            // Filter articles by category and section
+            const filteredArticles = articles.filter(a => 
+                a.category === category && a.section === section
+            );
+
+            // Pagination settings
+            const articlesPerPage = 18;
+            const totalPages = Math.ceil(filteredArticles.length / articlesPerPage);
+            const startIndex = (page - 1) * articlesPerPage;
+            const endIndex = startIndex + articlesPerPage;
+            const currentPageArticles = filteredArticles.slice(startIndex, endIndex);
+
+            // Display articles in grid
+            const articlesGrid = document.getElementById('articles-grid');
+            if (currentPageArticles.length > 0) {
+                articlesGrid.innerHTML = currentPageArticles.map(article => `
+                    <a href="article.html?id=${article.id}" class="section-article-card">
+                        <h3>${article.title}</h3>
+                        <p>${article.content.substring(0, 120)}...</p>
+                    </a>
+                `).join('');
+            } else {
+                articlesGrid.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; color: #666; padding: 40px;">No articles found in this section.</p>';
+            }
+
+            // Display pagination
+            const pagination = document.getElementById('pagination');
+            if (totalPages > 1) {
+                let paginationHTML = '';
+
+                // Previous button
+                if (page > 1) {
+                    paginationHTML += `<a href="?category=${encodeURIComponent(category)}&section=${encodeURIComponent(section)}&page=${page - 1}" style="padding: 8px 15px; border: 1px solid #ccc; border-radius: 5px; text-decoration: none; color: #333; background-color: white;">&laquo; Previous</a>`;
+                } else {
+                    paginationHTML += `<span style="padding: 8px 15px; color: #ccc; cursor: not-allowed;">&laquo; Previous</span>`;
+                }
+
+                // Page numbers
+                const maxVisiblePages = 7;
+                let startPage = Math.max(1, page - Math.floor(maxVisiblePages / 2));
+                let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+
+                if (endPage - startPage < maxVisiblePages - 1) {
+                    startPage = Math.max(1, endPage - maxVisiblePages + 1);
+                }
+
+                if (startPage > 1) {
+                    paginationHTML += `<a href="?category=${encodeURIComponent(category)}&section=${encodeURIComponent(section)}&page=1" style="padding: 8px 12px; border: 1px solid #ccc; border-radius: 5px; text-decoration: none; color: #333; background-color: white;">1</a>`;
+                    if (startPage > 2) {
+                        paginationHTML += `<span style="padding: 8px 5px; color: #666;">...</span>`;
+                    }
+                }
+
+                for (let i = startPage; i <= endPage; i++) {
+                    if (i === page) {
+                        paginationHTML += `<span style="padding: 8px 12px; border: 1px solid #007bff; border-radius: 5px; background-color: #007bff; color: white; font-weight: 600;">${i}</span>`;
+                    } else {
+                        paginationHTML += `<a href="?category=${encodeURIComponent(category)}&section=${encodeURIComponent(section)}&page=${i}" style="padding: 8px 12px; border: 1px solid #ccc; border-radius: 5px; text-decoration: none; color: #333; background-color: white;">${i}</a>`;
+                    }
+                }
+
+                if (endPage < totalPages) {
+                    if (endPage < totalPages - 1) {
+                        paginationHTML += `<span style="padding: 8px 5px; color: #666;">...</span>`;
+                    }
+                    paginationHTML += `<a href="?category=${encodeURIComponent(category)}&section=${encodeURIComponent(section)}&page=${totalPages}" style="padding: 8px 12px; border: 1px solid #ccc; border-radius: 5px; text-decoration: none; color: #333; background-color: white;">${totalPages}</a>`;
+                }
+
+                // Next button
+                if (page < totalPages) {
+                    paginationHTML += `<a href="?category=${encodeURIComponent(category)}&section=${encodeURIComponent(section)}&page=${page + 1}" style="padding: 8px 15px; border: 1px solid #ccc; border-radius: 5px; text-decoration: none; color: #333; background-color: white;">Next &raquo;</a>`;
+                } else {
+                    paginationHTML += `<span style="padding: 8px 15px; color: #ccc; cursor: not-allowed;">Next &raquo;</span>`;
+                }
+
+                pagination.innerHTML = paginationHTML;
+            } else {
+                pagination.innerHTML = '';
+            }
+        });
+    </script>
+</body>
+</html>
+
