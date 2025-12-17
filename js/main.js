@@ -239,10 +239,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     // Cookie button
+    const cookieButton = document.querySelector('.cookie-button');
     const acceptCookies = document.getElementById('accept-cookies');
+    
+    // Check if user has already accepted cookies
+    if (cookieButton) {
+        const cookiesAccepted = localStorage.getItem('cookiesAccepted');
+        if (cookiesAccepted === 'true') {
+            cookieButton.style.display = 'none';
+        }
+    }
+    
     if (acceptCookies) {
         acceptCookies.addEventListener('click', () => {
-            document.querySelector('.cookie-button').style.display = 'none';
+            localStorage.setItem('cookiesAccepted', 'true');
+            if (cookieButton) {
+                cookieButton.style.display = 'none';
+            }
         });
     }
 });
