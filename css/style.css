@@ -112,7 +112,7 @@ h1, h2, h3 {
 }
 
 .section-title {
-    text-align: center;
+    text-align: left;
     font-size: 2em;
     margin-bottom: 40px;
 }
@@ -121,6 +121,13 @@ h1, h2, h3 {
 .category-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr); /* This enforces the 2x2 grid */
+    gap: 20px;
+}
+
+/* --- 3 COLUMN GRID FOR UNITY PRODUCTS --- */
+.category-grid-3col {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* This enforces the 3x2 grid */
     gap: 20px;
 }
 
@@ -159,6 +166,15 @@ h1, h2, h3 {
     margin: 0;
     line-height: 1.5;
     text-align: center;
+}
+
+/* --- Category Separator --- */
+.category-separator {
+    border: none;
+    height: 1px;
+    background-color: #e0e0e0;
+    margin: 50px 0;
+    width: 100%;
 }
 
 /* --- Promoted Articles Grid --- */
@@ -454,6 +470,10 @@ footer {
 @media (max-width: 768px) {
     .category-grid {
         grid-template-columns: 1fr; /* Stack categories into 1 column on smaller screens */
+    }
+
+    .category-grid-3col {
+        grid-template-columns: 1fr; /* Stack Unity products into 1 column on smaller screens */
     }
 
     .promoted-articles-grid {
