@@ -24,9 +24,9 @@ h1, h2, h3 {
 
 /* --- Header --- */
 .header {
-    background-color: #222;
+    background-color: #000000;
     color: white;
-    padding: 12px 30px;
+    padding: 10px 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -80,7 +80,10 @@ h1, h2, h3 {
 
 /* --- Hero Search Section (Main Page) --- */
 .hero-section {
-    background-color: #f0f2f4;
+    background-image: url('../images/hero-background.svg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     text-align: center;
     padding: 60px 20px;
 }
