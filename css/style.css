@@ -139,9 +139,26 @@ h1, h2, h3 {
 }
 
 .category-card a {
-    font-size: 1.2em;
+    font-size: 1.56em;
     font-weight: 600;
-    color: #333;
+    color: #000;
+    display: block;
+    margin-bottom: 10px;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.category-card a:hover {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.category-description {
+    font-size: 0.95em;
+    color: #666;
+    margin: 0;
+    line-height: 1.5;
+    text-align: center;
 }
 
 /* --- Promoted Articles Grid --- */
@@ -153,16 +170,19 @@ h1, h2, h3 {
 
 .promoted-card {
     display: block;
-    padding: 15px;
-    border: 1px solid #e0e0e0;
-    border-radius: 5px;
-    color: #333;
+    padding: 12px 0;
+    border: none;
+    color: #000;
     text-decoration: none;
-    transition: box-shadow 0.2s;
+    transition: color 0.2s;
+    border-bottom: 1px solid #f0f0f0;
 }
 .promoted-card:hover {
-    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    color: #007bff;
     text-decoration: none;
+}
+.promoted-card:last-child {
+    border-bottom: none;
 }
 
 
