@@ -1,0 +1,75 @@
+<svg width="100%" height="100%" viewBox="0 0 2000 250" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Filters to create the soft light-leak effect -->
+    <filter id="soft-blur" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="20" />
+    </filter>
+    <filter id="heavy-blur" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="40" />
+    </filter>
+    <filter id="noise">
+        <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/>
+        <feColorMatrix type="saturate" values="0"/>
+    </filter>
+    
+    <!-- Gradients -->
+    
+    <!-- The main pink background (Left Side) -->
+    <linearGradient id="pink-base" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f3d1f4" />
+      <stop offset="50%" stop-color="#f0b6eb" />
+      <stop offset="100%" stop-color="#e6a3e6" />
+    </linearGradient>
+
+    <!-- The diagonal beam (Yellow/Orange transition) -->
+    <linearGradient id="beam-gradient" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff00cc" stop-opacity="0" />
+      <stop offset="30%" stop-color="#ff5e62" />
+      <stop offset="60%" stop-color="#ff9966" />
+      <stop offset="85%" stop-color="#eaeb34" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.8"/>
+    </linearGradient>
+
+    <!-- Right side flares -->
+    <linearGradient id="blue-flare" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#00c6ff" stop-opacity="0" />
+      <stop offset="50%" stop-color="#0072ff" />
+      <stop offset="100%" stop-color="#00c6ff" stop-opacity="0" />
+    </linearGradient>
+    
+    <linearGradient id="rainbow-flare" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00F260" stop-opacity="0.8" />
+      <stop offset="50%" stop-color="#0575E6" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#8E2DE2" stop-opacity="0.6" />
+    </linearGradient>
+
+  </defs>
+
+  <!-- Background Base: Dark on the right, will be covered on the left -->
+  <rect width="2000" height="250" fill="#020207" />
+
+  <!-- 1. The Left Pink Section -->
+  <!-- We use a path to create the diagonal cut -->
+  <path d="M0,0 L1200,0 L1500,250 L0,250 Z" fill="url(#pink-base)" />
+  
+  <!-- 2. The Bright Yellow/Orange Diagonal Transition Beam -->
+  <path d="M1150,0 L1350,0 L1650,250 L1450,250 Z" fill="url(#beam-gradient)" filter="url(#soft-blur)" opacity="0.9" style="mix-blend-mode: screen;" />
+
+  <!-- 3. Right Side Holographic Leaks -->
+  
+  <!-- Deep Blue Vertical Streak -->
+  <rect x="1600" y="-50" width="100" height="400" fill="url(#blue-flare)" filter="url(#heavy-blur)" opacity="0.8" transform="rotate(10 1650 125)" style="mix-blend-mode: screen;" />
+
+  <!-- Green/Teal Flare -->
+  <ellipse cx="1800" cy="125" rx="40" ry="150" fill="#00ff9d" filter="url(#heavy-blur)" opacity="0.6" style="mix-blend-mode: overlay;" />
+
+  <!-- Orange Warmth Leak -->
+  <rect x="1700" y="0" width="80" height="250" fill="#ff7b00" filter="url(#heavy-blur)" opacity="0.5" transform="skewX(-10)" style="mix-blend-mode: screen;" />
+
+  <!-- Far Right Purple/Blue Wash -->
+  <rect x="1850" y="0" width="150" height="250" fill="#4a00e0" filter="url(#heavy-blur)" opacity="0.7" style="mix-blend-mode: screen;" />
+
+  <!-- Optional: Subtle grain overlay for texture -->
+  <rect width="100%" height="100%" filter="url(#noise)" opacity="0.05"/>
+  
+</svg>

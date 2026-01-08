@@ -24,9 +24,9 @@ h1, h2, h3 {
 
 /* --- Header --- */
 .header {
-    background-color: #222;
+    background-color: #000000;
     color: white;
-    padding: 12px 30px;
+    padding: 10px 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -80,7 +80,10 @@ h1, h2, h3 {
 
 /* --- Hero Search Section (Main Page) --- */
 .hero-section {
-    background-color: #f0f2f4;
+    background-image: url('../images/hero-background.svg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     text-align: center;
     padding: 60px 20px;
 }
@@ -112,7 +115,7 @@ h1, h2, h3 {
 }
 
 .section-title {
-    text-align: center;
+    text-align: left;
     font-size: 2em;
     margin-bottom: 40px;
 }
@@ -124,24 +127,57 @@ h1, h2, h3 {
     gap: 20px;
 }
 
+/* --- 3 COLUMN GRID FOR UNITY PRODUCTS --- */
+.category-grid-3col {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* This enforces the 3x2 grid */
+    gap: 20px;
+}
+
 .category-card {
     background-color: #fff;
     border: 1px solid #e0e0e0;
     border-radius: 5px;
     padding: 25px;
     text-align: center;
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
 }
 
 .category-card:hover {
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     transform: translateY(-5px);
 }
 
 .category-card a {
-    font-size: 1.2em;
+    font-size: 1.56em;
     font-weight: 600;
-    color: #333;
+    color: #000;
+    display: block;
+    margin-bottom: 10px;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.category-card a:hover {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.category-description {
+    font-size: 0.95em;
+    color: #666;
+    margin: 0;
+    line-height: 1.5;
+    text-align: center;
+}
+
+/* --- Category Separator --- */
+.category-separator {
+    border: none;
+    height: 1px;
+    background-color: #e0e0e0;
+    margin: 50px 0;
+    width: 100%;
 }
 
 /* --- Promoted Articles Grid --- */
@@ -153,16 +189,19 @@ h1, h2, h3 {
 
 .promoted-card {
     display: block;
-    padding: 15px;
-    border: 1px solid #e0e0e0;
-    border-radius: 5px;
-    color: #333;
+    padding: 12px 0;
+    border: none;
+    color: #000;
     text-decoration: none;
-    transition: box-shadow 0.2s;
+    transition: color 0.2s;
+    border-bottom: 1px solid #f0f0f0;
 }
 .promoted-card:hover {
-    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    color: #007bff;
     text-decoration: none;
+}
+.promoted-card:last-child {
+    border-bottom: none;
 }
 
 
@@ -434,6 +473,10 @@ footer {
 @media (max-width: 768px) {
     .category-grid {
         grid-template-columns: 1fr; /* Stack categories into 1 column on smaller screens */
+    }
+
+    .category-grid-3col {
+        grid-template-columns: 1fr; /* Stack Unity products into 1 column on smaller screens */
     }
 
     .promoted-articles-grid {
