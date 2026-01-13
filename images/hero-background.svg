@@ -1,75 +1,61 @@
-<svg width="100%" height="100%" viewBox="0 0 2000 250" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="100%" height="100%" viewBox="0 0 2000 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
   <defs>
-    <!-- Filters to create the soft light-leak effect -->
-    <filter id="soft-blur" x="-50%" y="-50%" width="200%" height="200%">
+    <!-- Heavy blur for background blending -->
+    <filter id="prism-blur" x="-50%" y="-50%" width="200%" height="200%">
       <feGaussianBlur in="SourceGraphic" stdDeviation="20" />
     </filter>
-    <filter id="heavy-blur" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur in="SourceGraphic" stdDeviation="40" />
+    
+    <!-- Light blur for the flares on the right -->
+    <filter id="flare-blur" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="10" />
     </filter>
-    <filter id="noise">
-        <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/>
-        <feColorMatrix type="saturate" values="0"/>
-    </filter>
-    
-    <!-- Gradients -->
-    
-    <!-- The main pink background (Left Side) -->
-    <linearGradient id="pink-base" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#f3d1f4" />
-      <stop offset="50%" stop-color="#f0b6eb" />
-      <stop offset="100%" stop-color="#e6a3e6" />
+
+    <!-- Main Background Gradient (Left Side Pink) -->
+    <linearGradient id="main-pink" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#EFCEF5" /> <!-- Pale Pink -->
+      <stop offset="60%" stop-color="#F2A6E6" /> <!-- Deep Pink -->
+      <stop offset="100%" stop-color="#E08CD4" />
     </linearGradient>
 
-    <!-- The diagonal beam (Yellow/Orange transition) -->
-    <linearGradient id="beam-gradient" x1="0%" y1="100%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#ff00cc" stop-opacity="0" />
-      <stop offset="30%" stop-color="#ff5e62" />
-      <stop offset="60%" stop-color="#ff9966" />
-      <stop offset="85%" stop-color="#eaeb34" />
-      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.8"/>
+    <!-- The Rainbow/Prism Diagonal Gradient -->
+    <linearGradient id="prism-gradient" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#C77DF3" /> <!-- Purple -->
+      <stop offset="30%" stop-color="#FF5E62" /> <!-- Red/Orange -->
+      <stop offset="60%" stop-color="#FF9966" /> <!-- Orange -->
+      <stop offset="90%" stop-color="#FFFF5C" /> <!-- Yellow Bright -->
     </linearGradient>
 
-    <!-- Right side flares -->
-    <linearGradient id="blue-flare" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#00c6ff" stop-opacity="0" />
-      <stop offset="50%" stop-color="#0072ff" />
-      <stop offset="100%" stop-color="#00c6ff" stop-opacity="0" />
+    <!-- Right Side Flares Gradient -->
+    <linearGradient id="flare-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#000000" />
+      <stop offset="10%" stop-color="#1A2980" /> <!-- Deep Blue -->
+      <stop offset="30%" stop-color="#26D0CE" /> <!-- Cyan -->
+      <stop offset="50%" stop-color="#D95C14" /> <!-- Burnt Orange -->
+      <stop offset="80%" stop-color="#212F80" /> <!-- Blue -->
+      <stop offset="100%" stop-color="#000000" />
     </linearGradient>
-    
-    <linearGradient id="rainbow-flare" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#00F260" stop-opacity="0.8" />
-      <stop offset="50%" stop-color="#0575E6" stop-opacity="0.8" />
-      <stop offset="100%" stop-color="#8E2DE2" stop-opacity="0.6" />
-    </linearGradient>
-
   </defs>
 
-  <!-- Background Base: Dark on the right, will be covered on the left -->
-  <rect width="2000" height="250" fill="#020207" />
-
-  <!-- 1. The Left Pink Section -->
-  <!-- We use a path to create the diagonal cut -->
-  <path d="M0,0 L1200,0 L1500,250 L0,250 Z" fill="url(#pink-base)" />
+  <!-- 1. RIGHT SIDE BACKGROUND (Darkness + Flares) -->
+  <rect x="0" y="0" width="2000" height="200" fill="#02040a" />
   
-  <!-- 2. The Bright Yellow/Orange Diagonal Transition Beam -->
-  <path d="M1150,0 L1350,0 L1650,250 L1450,250 Z" fill="url(#beam-gradient)" filter="url(#soft-blur)" opacity="0.9" style="mix-blend-mode: screen;" />
+  <!-- The colorful vertical flares on the far right -->
+  <rect x="1500" y="0" width="500" height="200" fill="url(#flare-gradient)" opacity="0.8" filter="url(#flare-blur)" />
 
-  <!-- 3. Right Side Holographic Leaks -->
+
+  <!-- 2. MAIN SHAPE (Pink to Prism) -->
+  <!-- This is the large diagonal shape -->
+  <path d="M0 0 H1400 L1100 200 H0 V0Z" fill="url(#main-pink)" />
+
+  <!-- 3. PRISM EDGE EFFECT -->
+  <!-- This overlays the edge of the pink shape to create the glowing rainbow transition -->
+  <path d="M1100 200 L1400 0 L1550 0 L1250 200 Z" fill="url(#prism-gradient)" opacity="0.9" filter="url(#prism-blur)" />
   
-  <!-- Deep Blue Vertical Streak -->
-  <rect x="1600" y="-50" width="100" height="400" fill="url(#blue-flare)" filter="url(#heavy-blur)" opacity="0.8" transform="rotate(10 1650 125)" style="mix-blend-mode: screen;" />
-
-  <!-- Green/Teal Flare -->
-  <ellipse cx="1800" cy="125" rx="40" ry="150" fill="#00ff9d" filter="url(#heavy-blur)" opacity="0.6" style="mix-blend-mode: overlay;" />
-
-  <!-- Orange Warmth Leak -->
-  <rect x="1700" y="0" width="80" height="250" fill="#ff7b00" filter="url(#heavy-blur)" opacity="0.5" transform="skewX(-10)" style="mix-blend-mode: screen;" />
-
-  <!-- Far Right Purple/Blue Wash -->
-  <rect x="1850" y="0" width="150" height="250" fill="#4a00e0" filter="url(#heavy-blur)" opacity="0.7" style="mix-blend-mode: screen;" />
-
-  <!-- Optional: Subtle grain overlay for texture -->
-  <rect width="100%" height="100%" filter="url(#noise)" opacity="0.05"/>
+  <!-- 4. SHARP CUT (Hard Diagonal) -->
+  <!-- We redraw the diagonal cut cleanly to ensure the black background shows through sharply -->
+  <path d="M1420 0 L1120 200 H2000 V0 H1420Z" fill="#02040a" />
   
+  <!-- Re-add the right side flares on top of the cut for depth, but masked slightly -->
+  <rect x="1550" y="0" width="450" height="200" fill="url(#flare-gradient)" opacity="0.6" filter="url(#prism-blur)" style="mix-blend-mode: screen;" />
+
 </svg>
