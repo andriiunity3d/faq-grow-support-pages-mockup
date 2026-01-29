@@ -1,11 +1,17 @@
 /* --- General Body & Typography --- */
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-family: 'Inter', 'Noto Sans', sans-serif;
     margin: 0;
+    padding-top: 64px;
     background-color: #FFFFFF;
     color: #333;
     font-size: 16px;
     line-height: 1.6;
+}
+
+/* Pages without fixed header (e.g. my-requests) have no top gap */
+body:not(:has(.unity-header)) {
+    padding-top: 0;
 }
 
 a {
@@ -22,7 +28,108 @@ h1, h2, h3 {
     color: #111;
 }
 
-/* --- Header --- */
+/* --- Unity Header (fixed) --- */
+.unity-header {
+    background: #000000;
+    height: 64px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    border-bottom: 1px solid #222;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+.unity-header-container {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    padding: 0 32px;
+}
+
+.unity-logo-link {
+    display: flex;
+    align-items: center;
+}
+
+.unity-logo {
+    height: 36px;
+    width: auto;
+    display: block;
+    margin-right: 24px;
+}
+
+.unity-nav {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+.unity-nav-link {
+    color: #fff;
+    opacity: 0.85;
+    font-size: 16px;
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 24px;
+    transition: opacity 0.2s;
+}
+
+.unity-nav-link:hover {
+    opacity: 1;
+}
+
+/* Unity header: injected user controls (Submit a request, My Requests, Sign in) */
+.unity-nav .user-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: auto;
+}
+
+.unity-nav .user-controls a {
+    color: #fff;
+    opacity: 0.85;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: opacity 0.2s;
+}
+
+.unity-nav .user-controls a:hover {
+    opacity: 1;
+}
+
+.unity-nav .user-controls .btn-submit {
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    padding: 8px 16px;
+    border-radius: 6px;
+}
+
+.unity-nav .user-controls .btn-submit:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: #fff;
+}
+
+.unity-nav .user-menu {
+    position: relative;
+}
+
+.unity-nav .dropdown-content {
+    background: #fff;
+    color: #333;
+}
+
+.unity-nav .dropdown-content a {
+    color: #202020;
+}
+
+/* --- Legacy header (for other pages if needed) --- */
 .header {
     background-color: #000000;
     color: white;
@@ -78,22 +185,101 @@ h1, h2, h3 {
     display: block !important;
 }
 
-/* --- Hero Search Section (Main Page) --- */
+/* --- Hero Section (Main Page) --- */
 .hero-section {
-    background-image: url('../images/hero-background.svg');
+    position: relative;
+    z-index: 10;
+    height: 400px;
+    padding-top: 0;
+    background-image: url('../images/hero.png');
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: visible;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6));
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
     text-align: center;
-    padding: 60px 20px;
+    max-width: 800px;
+    padding: 0 20px;
+    width: 100%;
 }
 
-.hero-section h1 {
-    font-size: 3em;
-    margin-bottom: 20px;
-    color: #000;
+.hero-title {
+    color: white;
+    font-size: 48px;
+    font-weight: 600;
+    font-family: 'Inter', 'Noto Sans', sans-serif;
+    margin-bottom: 16px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    white-space: nowrap;
 }
 
+.hero-subtitle {
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 18px;
+    font-family: 'Inter', 'Noto Sans', sans-serif;
+    margin-bottom: 32px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Search bar in hero */
+.search-container {
+    position: relative;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.search-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.search-icon {
+    position: absolute;
+    left: 20px;
+    color: #646478;
+    font-size: 20px;
+    pointer-events: none;
+}
+
+.search-input {
+    width: 100%;
+    padding: 16px 20px 16px 56px;
+    font-size: 16px;
+    font-family: 'Inter', 'Noto Sans', sans-serif;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    outline: none;
+    transition: box-shadow 0.3s ease;
+}
+
+.search-input:focus {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+}
+
+.search-input::placeholder {
+    color: #999;
+}
+
+/* Legacy search bar (for pages that use .search-bar) */
 .search-bar {
     position: relative;
 }
@@ -111,7 +297,11 @@ h1, h2, h3 {
 .main-container {
     max-width: 1200px;
     margin: 40px auto;
-    padding: 0 20px;
+    padding: 60px 20px 40px;
+}
+
+.unity-help-container {
+    padding-top: 64px;
 }
 
 .section-title {
@@ -142,6 +332,25 @@ h1, h2, h3 {
     text-align: center;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     transition: transform 0.3s ease;
+}
+
+/* Unity Ecosystem cards: external link icon in top right */
+.category-card--external {
+    position: relative;
+}
+
+.category-card-external-icon {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    font-size: 1.1rem;
+    color: #666;
+    pointer-events: none;
+    transition: color 0.2s;
+}
+
+.category-card--external:hover .category-card-external-icon {
+    color: #007bff;
 }
 
 .category-card:hover {
@@ -471,6 +680,29 @@ footer {
 
 /* --- Responsive Design --- */
 @media (max-width: 768px) {
+    .hero-section {
+        height: 350px;
+    }
+
+    .hero-title {
+        font-size: 32px;
+        white-space: normal;
+    }
+
+    .hero-subtitle {
+        font-size: 16px;
+    }
+
+    .search-input {
+        padding: 14px 16px 14px 48px;
+        font-size: 15px;
+    }
+
+    .search-icon {
+        left: 16px;
+        font-size: 18px;
+    }
+
     .category-grid {
         grid-template-columns: 1fr; /* Stack categories into 1 column on smaller screens */
     }
@@ -507,7 +739,7 @@ footer {
 .section-article-card {
     display: block;
     padding: 20px;
-    border: 1px solid #e0e0e0;
+    border: none;
     border-radius: 5px;
     text-decoration: none;
     color: #333;
@@ -523,8 +755,13 @@ footer {
 
 .section-article-card h3 {
     margin: 0 0 10px 0;
-    color: #007bff;
+    color: #333;
     font-size: 1.1em;
+    transition: color 0.2s;
+}
+
+.section-article-card:hover h3 {
+    color: #007bff;
 }
 
 .section-article-card p {

@@ -24,7 +24,7 @@
 <body>
     <header class="header">
         <div class="logo">
-            <a href="../index.html"><img src="../images/u-logo.png" alt="Unity Logo"></a>
+            <a href="../index.html"><img src="../images/support-logo.png" alt="Support logo"></a>
         </div>
         <nav class="header-nav">
             <!-- User controls will be injected by JavaScript -->
@@ -66,8 +66,12 @@
         document.addEventListener('DOMContentLoaded', () => {
             // Get URL parameters
             const urlParams = new URLSearchParams(window.location.search);
-            const category = urlParams.get('category') || 'LevelPlay';
-            const section = urlParams.get('section') || 'SDK';
+            const category = urlParams.get('category') || 'Mediation';
+            let section = urlParams.get('section') || 'SDK';
+            // Normalize "General & Account" when URL was not encoded (e.g. section=General & Account → section becomes "General ")
+            if (section === 'General ' || section === 'General' || section === 'General&Account') {
+                section = 'General & Account';
+            }
             const page = parseInt(urlParams.get('page')) || 1;
 
             // Update page title and breadcrumbs

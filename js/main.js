@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Mock Login State ---
     // Check localStorage to persist login state across pages
     let loggedIn = localStorage.getItem('loggedIn') === 'true' || false;
-    const headerNav = document.querySelector('.header-nav');
+    const headerNav = document.querySelector('.header-nav') || document.querySelector('.unity-nav');
     if (headerNav) {
         renderHeader(); // Initial render on page load
     }
@@ -71,19 +71,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Live Search Functionality ---
-    const searchBar = document.querySelector('.search-bar input');
+    const searchBar = document.querySelector('.search-bar input') || document.querySelector('.search-container .search-input');
     if (searchBar) {
         let modal = document.querySelector('.search-modal');
         if (!modal) {
             modal = document.createElement('div');
             modal.className = 'search-modal';
-            const searchBarContainer = searchBar.closest('.search-bar');
+            const searchBarContainer = searchBar.closest('.search-bar') || searchBar.closest('.search-container');
             searchBarContainer.style.position = 'relative';
             searchBarContainer.appendChild(modal);
-            // Check if search bar is in breadcrumbs (inline) or hero section
+            // Check if search bar is in breadcrumbs (inline), hero (.search-container), or legacy hero
             const isInline = searchBarContainer.closest('.breadcrumbs');
+            const isHeroContainer = searchBarContainer.classList && searchBarContainer.classList.contains('search-container');
             if (isInline) {
                 modal.style.cssText = 'position: absolute; background: white; width: 100%; top: 100%; left: 0; border: 1px solid #ccc; border-top: none; box-shadow: 0 5px 10px rgba(0,0,0,0.1); z-index: 100; text-align: left; border-radius: 0 0 5px 5px; margin-top: 5px;';
+            } else if (isHeroContainer) {
+                modal.style.cssText = 'position: absolute; background: white; width: 100%; top: 100%; left: 0; border: 1px solid #ccc; border-top: none; box-shadow: 0 5px 10px rgba(0,0,0,0.1); z-index: 1001; text-align: left; border-radius: 0 0 8px 8px; margin-top: -1px;';
             } else {
                 modal.style.cssText = 'position: absolute; background: white; width: 62%; left: 19%; border: 1px solid #ccc; border-top: none; box-shadow: 0 5px 10px rgba(0,0,0,0.1); z-index: 100; text-align: left; border-radius: 0 0 5px 5px;';
             }
@@ -128,8 +131,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 modal.style.display = 'none';
             }
         });
-         document.addEventListener('click', (e) => {
-            if (searchBar && !searchBar.parentElement.contains(e.target)) {
+        const searchBarContainer = searchBar.closest('.search-bar') || searchBar.closest('.search-container');
+        document.addEventListener('click', (e) => {
+            if (searchBar && modal && searchBarContainer && !searchBarContainer.contains(e.target) && !modal.contains(e.target)) {
                 modal.style.display = 'none';
             }
         });
