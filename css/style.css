@@ -9,6 +9,11 @@ body {
     line-height: 1.6;
 }
 
+/* Pages without fixed header (e.g. my-requests) have no top gap */
+body:not(:has(.unity-header)) {
+    padding-top: 0;
+}
+
 a {
     color: #007bff;
     text-decoration: none;
@@ -327,6 +332,25 @@ h1, h2, h3 {
     text-align: center;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     transition: transform 0.3s ease;
+}
+
+/* Unity Ecosystem cards: external link icon in top right */
+.category-card--external {
+    position: relative;
+}
+
+.category-card-external-icon {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    font-size: 1.1rem;
+    color: #666;
+    pointer-events: none;
+    transition: color 0.2s;
+}
+
+.category-card--external:hover .category-card-external-icon {
+    color: #007bff;
 }
 
 .category-card:hover {
