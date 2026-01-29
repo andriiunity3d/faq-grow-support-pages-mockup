@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ads Monetization and User Acquisition | Unity Support</title>
+    <!-- Load Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Load Phosphor Icons -->
+    <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.0.3/src/regular/style.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -22,23 +28,34 @@
 </script>
 
 <body>
-    <header class="header">
-        <div class="logo">
-            <a href="index.html"><img src="images/u-logo.png" alt="Unity Logo"></a>
+    <!-- Header / Menu Banner -->
+    <header class="unity-header">
+        <div class="unity-header-container">
+            <a href="index.html" class="unity-logo-link">
+                <img src="images/support-logo.png" alt="Support logo" class="unity-logo">
+            </a>
+            <nav class="unity-nav">
+                <!-- User controls will be injected by JavaScript -->
+            </nav>
         </div>
-        <nav class="header-nav">
-            <!-- User controls will be injected by JavaScript -->
-        </nav>
     </header>
 
-    <main>
-        <section class="hero-section">
-            <h1>Ads Monetization and User Acquisition</h1>
-            <div class="search-bar">
-                <input type="text" placeholder="Search for answers...">
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">Ads Monetization and User Acquisition</h1>
+            <p class="hero-subtitle">Support for your work within the Unity ecosystem</p>
+            <div class="search-container">
+                <div class="search-wrapper">
+                    <i class="ph ph-magnifying-glass search-icon"></i>
+                    <input type="text" class="search-input" placeholder="Search the Knowledge Base for answers">
+                </div>
             </div>
-        </section>
+        </div>
+    </div>
 
+    <main>
         <div class="main-container">
             <h2 class="section-title">Monetization</h2>
             <div class="category-grid">
