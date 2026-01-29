@@ -220,6 +220,7 @@ h1, h2, h3 {
     font-family: 'Inter', 'Noto Sans', sans-serif;
     margin-bottom: 16px;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    white-space: nowrap;
 }
 
 .hero-subtitle {
@@ -661,6 +662,7 @@ footer {
 
     .hero-title {
         font-size: 32px;
+        white-space: normal;
     }
 
     .hero-subtitle {
@@ -713,7 +715,7 @@ footer {
 .section-article-card {
     display: block;
     padding: 20px;
-    border: 1px solid #e0e0e0;
+    border: none;
     border-radius: 5px;
     text-decoration: none;
     color: #333;
@@ -729,8 +731,13 @@ footer {
 
 .section-article-card h3 {
     margin: 0 0 10px 0;
-    color: #007bff;
+    color: #333;
     font-size: 1.1em;
+    transition: color 0.2s;
+}
+
+.section-article-card:hover h3 {
+    color: #007bff;
 }
 
 .section-article-card p {
