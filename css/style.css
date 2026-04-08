@@ -1,3 +1,35 @@
+/* --- Accessibility Utilities --- */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.skip-link {
+    position: absolute;
+    top: -100%;
+    left: 16px;
+    z-index: 10000;
+    padding: 12px 24px;
+    background: #007bff;
+    color: #fff;
+    font-weight: 600;
+    font-size: 16px;
+    text-decoration: none;
+    border-radius: 0 0 6px 6px;
+    transition: top 0.2s;
+}
+
+.skip-link:focus {
+    top: 0;
+}
+
 /* --- General Body & Typography --- */
 body {
     font-family: 'Inter', 'Noto Sans', sans-serif;
@@ -273,12 +305,22 @@ h1, h2, h3 {
     border: none;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    outline: none;
     transition: box-shadow 0.3s ease;
 }
 
 .search-input:focus {
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+    outline: 3px solid #005fcc;
+    outline-offset: 2px;
+}
+
+:focus-visible {
+    outline: 3px solid #005fcc;
+    outline-offset: 2px;
+}
+
+:focus:not(:focus-visible) {
+    outline: none;
 }
 
 .search-input::placeholder {
@@ -302,8 +344,8 @@ h1, h2, h3 {
 /* --- Main Content Sections --- */
 .main-container {
     max-width: 1200px;
-    margin: 40px auto;
-    padding: 60px 20px 40px;
+    margin: 0 auto;
+    padding: 50px 20px 40px;
 }
 
 .unity-help-container {
@@ -526,12 +568,32 @@ h1, h2, h3 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
-    cursor: pointer;
+    padding: 0;
     background-color: #f8f9fa;
 }
+
 .section-header h3 {
     margin: 0;
+    padding: 20px;
+    flex: 1;
+}
+
+.section-header .section-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font: inherit;
+    color: inherit;
+    flex-shrink: 0;
+}
+
+.section-header .section-toggle:focus-visible {
+    outline: 3px solid #005fcc;
+    outline-offset: -3px;
 }
 .toggle-btn {
     font-size: 2em;
@@ -630,13 +692,154 @@ h1, h2, h3 {
 
 
 /* --- Footer --- */
-footer {
-    text-align: center;
-    padding: 2rem;
+footer.footer {
+    background-color: #222;
+    color: #fff;
+    padding: 48px 0 32px;
     margin-top: 40px;
-    background-color: #f8f8f8;
-    border-top: 1px solid #e0e0e0;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.footer-flex-vertical {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.footer-flex-logo-copyright-social {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+}
+
+.footer-flex-start-logo-copyright {
+    display: flex;
+    align-items: center;
+}
+
+.unity-logo-black-foot svg {
+    height: 28px;
+    width: auto;
+    display: block;
+}
+
+.copyright-uni {
+    color: #999;
+    font-size: 13px;
+}
+
+.footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.footer-links ul.no-bullets {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+}
+
+.footer-links ul.no-bullets li a {
+    color: #ccc;
+    text-decoration: none;
+    font-size: 13px;
+    transition: color 0.2s;
+}
+
+.footer-links ul.no-bullets li a:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
+.footer-flex-social {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+.social-label {
+    font-size: 13px;
+    color: #999;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.social-links {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+.social-links-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    color: #999;
+    transition: color 0.2s;
+}
+
+.social-links-icon:hover {
+    color: #fff;
+}
+
+.social-links-icon svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+}
+
+.footer-flex-start-copyright-language {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+    border-top: 1px solid #444;
+    padding-top: 24px;
+    margin-top: 8px;
+}
+
+.unity-trademark-text {
     color: #777;
+    font-size: 12px;
+    line-height: 1.6;
+    max-width: 700px;
+}
+
+.unity-trademark-text a.trademark-link {
+    color: #aaa;
+    text-decoration: underline;
+}
+
+.unity-trademark-text a.trademark-link:hover {
+    color: #fff;
+}
+
+@media (max-width: 768px) {
+    .footer-flex-logo-copyright-social {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .footer-flex-social {
+        align-items: flex-start;
+    }
 }
 
 /* --- Cookie Banner --- */
@@ -676,6 +879,7 @@ footer {
 }
 .close-button {
     color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer;
+    background: none; border: none; padding: 0; line-height: 1;
 }
 .modal-content textarea {
     width: 100%; height: 100px; margin: 15px 0; padding: 10px; box-sizing: border-box; resize: vertical;
