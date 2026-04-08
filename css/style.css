@@ -55,6 +55,13 @@ h1, h2, h3 {
 .unity-logo-link {
     display: flex;
     align-items: center;
+    opacity: 0.85;
+    transition: opacity 0.2s, transform 0.2s;
+}
+
+.unity-logo-link:hover {
+    opacity: 1;
+    transform: scale(1.08);
 }
 
 .unity-logo {
@@ -213,7 +220,7 @@ h1, h2, h3 {
     position: relative;
     z-index: 2;
     text-align: center;
-    max-width: 800px;
+    max-width: 1000px;
     padding: 0 20px;
     width: 100%;
 }
@@ -225,7 +232,6 @@ h1, h2, h3 {
     font-family: 'Inter', 'Noto Sans', sans-serif;
     margin-bottom: 16px;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    white-space: nowrap;
 }
 
 .hero-subtitle {
