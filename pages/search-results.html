@@ -7,32 +7,20 @@
     <link rel="stylesheet" href="../css/style.css">
 </head>
 
-<!-- Intercom script for user support -->
-<script>
-  window.intercomSettings = {
-    api_base: "https://api-iam.intercom.io",
-    app_id: "s0c7oq3q",
-  };
-</script>
-
-
-<script>
-  // We pre-filled your app ID in the widget URL: 'https://widget.intercom.io/widget/s0c7oq3q'
-  (function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',w.intercomSettings);}else{var d=document;var i=function(){i.c(arguments);};i.q=[];i.c=function(args){i.q.push(args);};w.Intercom=i;var l=function(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/s0c7oq3q';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);};if(document.readyState==='complete'){l();}else if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();
-</script>
-
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <header class="header">
         <div class="logo">
-            <a href="../index.html"><img src="../images/support-logo.png" alt="Support logo"></a>
+            <a href="../index.html"><img src="../images/support-logo.png" alt="Unity Support home"></a>
         </div>
-        <nav class="header-nav">
+        <nav class="header-nav" aria-label="Main navigation">
             <!-- User controls will be injected by JavaScript -->
         </nav>
     </header>
 
     <div class="main-container page-container">
-        <aside class="sidebar">
+        <aside class="sidebar" aria-label="Filter by category">
             <h3>Filter by Category</h3>
             <ul>
                 <li><a href="#">All Categories (10)</a></li>
@@ -42,29 +30,33 @@
             </ul>
         </aside>
 
-        <main class="main-content">
+        <main class="main-content" id="main-content">
             <div class="breadcrumbs" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                <div>
-                    <a href="../index.html">Support Home</a> &gt; Search Results
-                </div>
-                <div class="search-bar" style="width: 300px;">
-                    <input type="text" placeholder="Search for answers..." style="width: 100%; padding: 8px 15px; border: 1px solid #ccc; border-radius: 5px; font-size: 0.9em;">
+                <nav aria-label="Breadcrumb">
+                    <ol>
+                        <li><a href="../index.html">Support Home</a></li>
+                        <li aria-current="page">Search Results</li>
+                    </ol>
+                </nav>
+                <div class="search-bar" style="width: 300px;" role="search">
+                    <label for="search-results-input" class="sr-only">Search for answers</label>
+                    <input type="text" id="search-results-input" placeholder="Search for answers..." style="width: 100%; padding: 8px 15px; border: 1px solid #ccc; border-radius: 5px; font-size: 0.9em;">
                 </div>
             </div>
             
             <h2>10 results for 'SDK integration'</h2>
 
-            <div class="ai-answer-box">
-                <h3>AI Suggestion</h3>
+            <div class="ai-answer-box" role="region" aria-label="AI Suggestion">
+                <h3 id="ai-suggestion-heading">AI Suggestion</h3>
                 <p>To integrate the SDK, you need to follow the steps in our official documentation, which includes adding the SDK to your project dependencies and initializing it in your main application class.</p>
                 <small>Based on: <a href="article.html?id=6">How to integrate the IronSource SDK</a></small>
-                <div class="feedback" style="margin-top: 10px;">
-                    <button style="padding: 5px 10px;">👍</button>
-                    <button style="padding: 5px 10px;">👎</button>
+                <div class="feedback" style="margin-top: 10px;" aria-label="AI suggestion feedback">
+                    <button style="padding: 5px 10px;" aria-label="This suggestion was helpful">👍 <span class="sr-only">Helpful</span></button>
+                    <button style="padding: 5px 10px;" aria-label="This suggestion was not helpful">👎 <span class="sr-only">Not helpful</span></button>
                 </div>
             </div>
 
-            <section class="article-list">
+            <section class="article-list" aria-label="Search results">
                 <div class="article-list-item">
                     <h3><a href="article.html?id=6">How to integrate the IronSource SDK</a></h3>
                     <p>...Step-by-step instructions for a successful <b>SDK integration</b> on iOS and Android. This article covers dependencies and required adapter initializations...</p>
@@ -88,6 +80,16 @@
         <p>&copy; 2025 Unity Technologies</p>
     </footer>
 
+    <!-- Intercom script for user support -->
+    <script>
+      window.intercomSettings = {
+        api_base: "https://api-iam.intercom.io",
+        app_id: "s0c7oq3q",
+      };
+    </script>
+    <script>
+      (function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',w.intercomSettings);}else{var d=document;var i=function(){i.c(arguments);};i.q=[];i.c=function(args){i.q.push(args);};w.Intercom=i;var l=function(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/s0c7oq3q';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);};if(document.readyState==='complete'){l();}else if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();
+    </script>
     <script src="../js/data.js"></script>
     <script src="../js/main.js"></script>
 </body>

@@ -7,29 +7,32 @@
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <header class="header">
         <div class="logo">
-            <a href="../index.html"><img src="../images/support-logo.png" alt="Support logo"></a>
+            <a href="../index.html"><img src="../images/support-logo.png" alt="Unity Support home"></a>
         </div>
-        <nav class="header-nav">
+        <nav class="header-nav" aria-label="Admin navigation">
             <a href="../index.html">View Site</a>
             <a href="#">Admin Profile</a>
         </nav>
     </header>
 
-    <div class="main-container">
+    <main class="main-container" id="main-content">
         <h1>Admin Dashboard</h1>
         <p>Support Center User Activity Statistics</p>
 
-        <section class="admin-section">
-            <h2>Article Engagement</h2>
-            <table class="admin-table">
+        <section class="admin-section" aria-labelledby="article-engagement-heading">
+            <h2 id="article-engagement-heading">Article Engagement</h2>
+            <table class="admin-table" aria-labelledby="article-engagement-heading">
+                <caption class="sr-only">Article engagement statistics showing views, likes, and dislikes per article</caption>
                 <thead>
                     <tr>
-                        <th>Article Title</th>
-                        <th>Views</th>
-                        <th>Likes</th>
-                        <th>Dislikes</th>
+                        <th scope="col">Article Title</th>
+                        <th scope="col">Views</th>
+                        <th scope="col">Likes</th>
+                        <th scope="col">Dislikes</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -55,21 +58,22 @@
             </table>
         </section>
 
-        <section class="admin-section">
-            <h2>User Feedback ("Dislikes")</h2>
+        <section class="admin-section" aria-labelledby="user-feedback-heading">
+            <h2 id="user-feedback-heading">User Feedback ("Dislikes")</h2>
             <ul class="feedback-list">
                 <li><strong>Article:</strong> Integrating the IronSource SDK<br><strong>Comment:</strong> "The code snippets are outdated for the latest version of Android Studio."</li>
                 <li><strong>Article:</strong> Best Practices for UnityAds Placements<br><strong>Comment:</strong> "The images are broken and I cannot see the examples."</li>
             </ul>
         </section>
 
-         <section class="admin-section">
-            <h2>Recent Search Queries</h2>
-             <table class="admin-table">
+         <section class="admin-section" aria-labelledby="search-queries-heading">
+            <h2 id="search-queries-heading">Recent Search Queries</h2>
+             <table class="admin-table" aria-labelledby="search-queries-heading">
+                <caption class="sr-only">Recent search queries in the last 24 hours</caption>
                 <thead>
                     <tr>
-                        <th>Search Term</th>
-                        <th>Times Searched (24h)</th>
+                        <th scope="col">Search Term</th>
+                        <th scope="col">Times Searched (24h)</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -92,7 +96,7 @@
                 </tbody>
             </table>
         </section>
-    </div>
+    </main>
 
     <footer>
         <p>&copy; 2025 Unity Technologies</p>

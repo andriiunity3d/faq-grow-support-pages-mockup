@@ -7,38 +7,31 @@
     <link rel="stylesheet" href="../css/style.css">
 </head>
 
-<!-- Intercom script for user support -->
-<script>
-  window.intercomSettings = {
-    api_base: "https://api-iam.intercom.io",
-    app_id: "s0c7oq3q",
-  };
-</script>
-
-
-<script>
-  // We pre-filled your app ID in the widget URL: 'https://widget.intercom.io/widget/s0c7oq3q'
-  (function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',w.intercomSettings);}else{var d=document;var i=function(){i.c(arguments);};i.q=[];i.c=function(args){i.q.push(args);};w.Intercom=i;var l=function(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/s0c7oq3q';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);};if(document.readyState==='complete'){l();}else if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();
-</script>
-
 <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <header class="header">
         <div class="logo">
-            <a href="../index.html"><img src="../images/support-logo.png" alt="Support logo"></a>
+            <a href="../index.html"><img src="../images/support-logo.png" alt="Unity Support home"></a>
         </div>
-        <nav class="header-nav">
+        <nav class="header-nav" aria-label="Main navigation">
             <!-- User controls will be injected by JavaScript -->
         </nav>
     </header>
 
     <div class="main-container">
-        <main class="main-content" style="width: 100%;">
-            <div class="breadcrumbs" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                <div id="breadcrumb-content">
-                    <a href="../index.html">Support Home</a> &gt; <span id="category-name">Category</span> &gt; <span id="section-name">Section</span>
-                </div>
-                <div class="search-bar" style="width: 300px;">
-                    <input type="text" placeholder="Search for answers..." style="width: 100%; padding: 8px 15px; border: 1px solid #ccc; border-radius: 5px; font-size: 0.9em;">
+        <main class="main-content" id="main-content" style="width: 100%;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <nav class="breadcrumbs" aria-label="Breadcrumb" id="breadcrumb-content">
+                    <ol>
+                        <li><a href="../index.html">Support Home</a></li>
+                        <li><a id="category-name-link" href="#">Category</a></li>
+                        <li aria-current="page"><span id="section-name">Section</span></li>
+                    </ol>
+                </nav>
+                <div class="search-bar" style="width: 300px;" role="search">
+                    <label for="section-search" class="sr-only">Search for answers</label>
+                    <input type="text" id="section-search" placeholder="Search for answers..." style="width: 100%; padding: 8px 15px; border: 1px solid #ccc; border-radius: 5px; font-size: 0.9em;">
                 </div>
             </div>
             
@@ -46,20 +39,31 @@
                 <h1 id="section-title">Section Title</h1>
             </header>
 
-            <div id="articles-grid" class="section-articles-grid">
+            <div id="articles-grid" class="section-articles-grid" aria-live="polite">
                 <!-- Articles will be injected by JavaScript -->
             </div>
 
-            <div id="pagination" class="pagination">
+            <nav id="pagination" class="pagination" aria-label="Pagination">
                 <!-- Pagination will be injected by JavaScript -->
-            </div>
+            </nav>
         </main>
     </div>
 
     <footer>
         <p>&copy; 2025 Unity Technologies</p>
     </footer>
-    
+
+    <!-- Intercom script for user support -->
+    <script>
+      window.intercomSettings = {
+        api_base: "https://api-iam.intercom.io",
+        app_id: "s0c7oq3q",
+      };
+    </script>
+    <script>
+      (function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',w.intercomSettings);}else{var d=document;var i=function(){i.c(arguments);};i.q=[];i.c=function(args){i.q.push(args);};w.Intercom=i;var l=function(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/s0c7oq3q';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);};if(document.readyState==='complete'){l();}else if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();
+    </script>
+
     <script src="../js/data.js"></script>
     <script src="../js/main.js"></script>
     <script>
@@ -76,7 +80,11 @@
 
             // Update page title and breadcrumbs
             document.getElementById('section-title').textContent = section;
-            document.getElementById('category-name').textContent = category;
+            const catNameLink = document.getElementById('category-name-link');
+            if (catNameLink) {
+                catNameLink.textContent = category;
+                catNameLink.href = `article-category.html?category=${encodeURIComponent(category)}`;
+            }
             document.getElementById('section-name').textContent = section;
             document.title = `${section} - ${category} - Unity Support`;
 
@@ -112,9 +120,9 @@
 
                 // Previous button
                 if (page > 1) {
-                    paginationHTML += `<a href="?category=${encodeURIComponent(category)}&section=${encodeURIComponent(section)}&page=${page - 1}" style="padding: 8px 15px; border: 1px solid #ccc; border-radius: 5px; text-decoration: none; color: #333; background-color: white;">&laquo; Previous</a>`;
+                    paginationHTML += `<a href="?category=${encodeURIComponent(category)}&section=${encodeURIComponent(section)}&page=${page - 1}" aria-label="Previous page" style="padding: 8px 15px; border: 1px solid #ccc; border-radius: 5px; text-decoration: none; color: #333; background-color: white;">&laquo; Previous</a>`;
                 } else {
-                    paginationHTML += `<span style="padding: 8px 15px; color: #ccc; cursor: not-allowed;">&laquo; Previous</span>`;
+                    paginationHTML += `<span aria-disabled="true" aria-label="Previous page, unavailable" style="padding: 8px 15px; color: #767676; cursor: not-allowed;">&laquo; Previous</span>`;
                 }
 
                 // Page numbers
@@ -135,9 +143,9 @@
 
                 for (let i = startPage; i <= endPage; i++) {
                     if (i === page) {
-                        paginationHTML += `<span style="padding: 8px 12px; border: 1px solid #007bff; border-radius: 5px; background-color: #007bff; color: white; font-weight: 600;">${i}</span>`;
+                        paginationHTML += `<span aria-current="page" style="padding: 8px 12px; border: 1px solid #007bff; border-radius: 5px; background-color: #007bff; color: white; font-weight: 600;">${i}</span>`;
                     } else {
-                        paginationHTML += `<a href="?category=${encodeURIComponent(category)}&section=${encodeURIComponent(section)}&page=${i}" style="padding: 8px 12px; border: 1px solid #ccc; border-radius: 5px; text-decoration: none; color: #333; background-color: white;">${i}</a>`;
+                        paginationHTML += `<a href="?category=${encodeURIComponent(category)}&section=${encodeURIComponent(section)}&page=${i}" aria-label="Page ${i}" style="padding: 8px 12px; border: 1px solid #ccc; border-radius: 5px; text-decoration: none; color: #333; background-color: white;">${i}</a>`;
                     }
                 }
 
@@ -150,9 +158,9 @@
 
                 // Next button
                 if (page < totalPages) {
-                    paginationHTML += `<a href="?category=${encodeURIComponent(category)}&section=${encodeURIComponent(section)}&page=${page + 1}" style="padding: 8px 15px; border: 1px solid #ccc; border-radius: 5px; text-decoration: none; color: #333; background-color: white;">Next &raquo;</a>`;
+                    paginationHTML += `<a href="?category=${encodeURIComponent(category)}&section=${encodeURIComponent(section)}&page=${page + 1}" aria-label="Next page" style="padding: 8px 15px; border: 1px solid #ccc; border-radius: 5px; text-decoration: none; color: #333; background-color: white;">Next &raquo;</a>`;
                 } else {
-                    paginationHTML += `<span style="padding: 8px 15px; color: #ccc; cursor: not-allowed;">Next &raquo;</span>`;
+                    paginationHTML += `<span aria-disabled="true" aria-label="Next page, unavailable" style="padding: 8px 15px; color: #767676; cursor: not-allowed;">Next &raquo;</span>`;
                 }
 
                 pagination.innerHTML = paginationHTML;

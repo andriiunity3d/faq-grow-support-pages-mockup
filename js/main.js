@@ -19,20 +19,36 @@ document.addEventListener('DOMContentLoaded', () => {
             // LOGGED-IN STATE: Shows user icon and menu
             const urlPath = window.location.pathname.includes('/pages/') ? '' : 'pages/';
             controls.innerHTML = `
-                <a href="https://support-ads.unity.com/s/ContactUs" class="btn-submit">Submit a request</a>
+                <a href="https://support-ads.unity.com/s/ContactUs" class="btn-submit" target="_blank" rel="noopener noreferrer">Submit a request<span style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;"> (opens in new tab)</span></a>
                 <a href="${urlPath}my-requests.html" class="btn-submit">My Requests</a>
                 <div class="user-menu" style="display: inline-block; position: relative; margin-left: 15px; vertical-align: middle;">
-                    <div class="user-icon" style="width: 30px; height: 30px; border-radius: 50%; background-color: #007bff; cursor: pointer; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 14px;">U</div>
-                    <div class="dropdown-content" style="display: none; position: absolute; right: 0; background-color: #fff; color: #333; min-width: 160px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 10; border-radius: 5px;">
-                        <a href="#" id="sign-out-btn" style="color: black; padding: 12px 16px; text-decoration: none; display: block;">Sign out</a>
+                    <button class="user-icon" aria-haspopup="true" aria-expanded="false" aria-label="User menu" style="width: 30px; height: 30px; border-radius: 50%; background-color: #007bff; cursor: pointer; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 14px; border: none;" aria-label="Open user menu">U</button>
+                    <div class="dropdown-content" role="menu" style="display: none; position: absolute; right: 0; background-color: #fff; color: #333; min-width: 160px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 10; border-radius: 5px;">
+                        <a href="#" id="sign-out-btn" role="menuitem" style="color: black; padding: 12px 16px; text-decoration: none; display: block;">Sign out</a>
                     </div>
                 </div>
             `;
             headerNav.prepend(controls);
             const userMenu = headerNav.querySelector('.user-menu');
+            const userIconBtn = headerNav.querySelector('.user-icon');
             const dropdown = headerNav.querySelector('.dropdown-content');
-            userMenu.addEventListener('click', () => {
-                dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+            userIconBtn.addEventListener('click', () => {
+                const isOpen = dropdown.style.display === 'block';
+                dropdown.style.display = isOpen ? 'none' : 'block';
+                userIconBtn.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+            });
+            userIconBtn.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    dropdown.style.display = 'none';
+                    userIconBtn.setAttribute('aria-expanded', 'false');
+                    userIconBtn.focus();
+                }
+            });
+            document.addEventListener('click', (e) => {
+                if (!userMenu.contains(e.target)) {
+                    dropdown.style.display = 'none';
+                    userIconBtn.setAttribute('aria-expanded', 'false');
+                }
             });
             // Add sign out functionality
             const signOutBtn = headerNav.querySelector('#sign-out-btn');
@@ -77,6 +93,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!modal) {
             modal = document.createElement('div');
             modal.className = 'search-modal';
+            modal.setAttribute('role', 'listbox');
+            modal.setAttribute('aria-label', 'Search suggestions');
+            modal.id = 'search-suggestions';
+            searchBar.setAttribute('aria-autocomplete', 'list');
+            searchBar.setAttribute('aria-controls', 'search-suggestions');
+            searchBar.setAttribute('aria-expanded', 'false');
             const searchBarContainer = searchBar.closest('.search-bar') || searchBar.closest('.search-container');
             searchBarContainer.style.position = 'relative';
             searchBarContainer.appendChild(modal);
@@ -101,15 +123,18 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             if (query.length < 3) {
                 modal.style.display = 'none';
+                searchBar.setAttribute('aria-expanded', 'false');
                 return;
             }
             const results = articles.filter(a => a.title.toLowerCase().includes(query) || a.content.toLowerCase().includes(query)).slice(0, 5);
             modal.innerHTML = '';
             if (results.length > 0) {
+                searchBar.setAttribute('aria-expanded', 'true');
                 results.forEach(r => {
                     const item = document.createElement('a');
                     const urlPath = window.location.pathname.includes('/pages/') ? '' : 'pages/';
                     item.href = `${urlPath}article.html?id=${r.id}`;
+                    item.setAttribute('role', 'option');
                     item.style.cssText = 'display: block; padding: 10px 15px; text-decoration: none; color: #333; border-bottom: 1px solid #f0f0f0;';
                     
                     // Create container for title and location
@@ -129,12 +154,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 modal.style.display = 'block';
             } else {
                 modal.style.display = 'none';
+                searchBar.setAttribute('aria-expanded', 'false');
             }
         });
         const searchBarContainer = searchBar.closest('.search-bar') || searchBar.closest('.search-container');
         document.addEventListener('click', (e) => {
             if (searchBar && modal && searchBarContainer && !searchBarContainer.contains(e.target) && !modal.contains(e.target)) {
                 modal.style.display = 'none';
+                searchBar.setAttribute('aria-expanded', 'false');
             }
         });
     }
@@ -159,15 +186,28 @@ document.addEventListener('DOMContentLoaded', () => {
         const toggleBtn = header.querySelector('.toggle-btn');
         const sectionLink = header.querySelector('.section-link');
 
+        // Toggle button is now a real <button> with aria-expanded and aria-controls
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const isExpanded = section.classList.toggle('expanded');
+                content.style.display = isExpanded ? 'block' : 'none';
+                toggleBtn.textContent = isExpanded ? '−' : '+';
+                toggleBtn.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+            });
+        }
+
+        // Also allow clicking anywhere on the header bar (except the link) to toggle
         header.addEventListener('click', (e) => {
-            // If clicking the section link, let it navigate (don't toggle)
-            if (e.target.closest('.section-link')) {
+            if (e.target.closest('.section-link') || e.target.closest('.toggle-btn')) {
                 return;
             }
-            // If clicking the toggle button or header area, toggle expand/collapse
             const isExpanded = section.classList.toggle('expanded');
             content.style.display = isExpanded ? 'block' : 'none';
-            toggleBtn.textContent = isExpanded ? '−' : '+';
+            if (toggleBtn) {
+                toggleBtn.textContent = isExpanded ? '−' : '+';
+                toggleBtn.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+            }
         });
     });
 
@@ -214,9 +254,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         noBtn.addEventListener('click', () => {
-            document.getElementById('feedback-modal').style.display = 'block';
+            const feedbackModal = document.getElementById('feedback-modal');
+            feedbackModal.style.display = 'block';
             yesBtn.disabled = true;
             noBtn.disabled = true;
+            // Move focus into modal for screen readers (WCAG 2.4.3)
+            const firstFocusable = feedbackModal.querySelector('button, textarea, [tabindex]:not([tabindex="-1"])');
+            if (firstFocusable) firstFocusable.focus();
         });
     }
     
@@ -236,9 +280,45 @@ document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('feedback-modal');
     if (modal) {
         const closeBtn = modal.querySelector('.close-button');
-        closeBtn.addEventListener('click', () => modal.style.display = 'none');
+        let modalTrigger = null;
+
+        function closeModal() {
+            modal.style.display = 'none';
+            // Restore focus to the element that opened the modal
+            if (modalTrigger) modalTrigger.focus();
+        }
+
+        // Track which element opened the modal
+        const noBtnEl = document.getElementById('no-btn');
+        if (noBtnEl) {
+            noBtnEl.addEventListener('click', () => { modalTrigger = noBtnEl; });
+        }
+
+        closeBtn.addEventListener('click', closeModal);
+
+        // Close on backdrop click
         window.addEventListener('click', (e) => {
-            if (e.target === modal) modal.style.display = 'none';
+            if (e.target === modal) closeModal();
+        });
+
+        // Close on Escape key
+        modal.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        // Trap focus inside modal
+        modal.addEventListener('keydown', (e) => {
+            if (e.key !== 'Tab') return;
+            const focusable = modal.querySelectorAll('button, textarea, [tabindex]:not([tabindex="-1"])');
+            const first = focusable[0];
+            const last = focusable[focusable.length - 1];
+            if (e.shiftKey && document.activeElement === first) {
+                e.preventDefault();
+                last.focus();
+            } else if (!e.shiftKey && document.activeElement === last) {
+                e.preventDefault();
+                first.focus();
+            }
         });
     }
     
