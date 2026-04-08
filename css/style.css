@@ -45,16 +45,23 @@ h1, h2, h3 {
 
 .unity-header-container {
     width: 100%;
-    max-width: 1280px;
+    max-width: 1200px;
     margin: 0 auto;
     display: flex;
     align-items: center;
-    padding: 0 32px;
+    padding: 0 20px;
 }
 
 .unity-logo-link {
     display: flex;
     align-items: center;
+    opacity: 0.85;
+    transition: opacity 0.2s, transform 0.2s;
+}
+
+.unity-logo-link:hover {
+    opacity: 1;
+    transform: scale(1.08);
 }
 
 .unity-logo {
@@ -88,7 +95,7 @@ h1, h2, h3 {
 .unity-nav .user-controls {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 32px;
     margin-left: auto;
 }
 
@@ -133,7 +140,7 @@ h1, h2, h3 {
 .header {
     background-color: #000000;
     color: white;
-    padding: 10px 30px;
+    padding: 10px max(20px, calc((100% - 1200px) / 2 + 20px));
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -164,7 +171,7 @@ h1, h2, h3 {
 
 .header-nav a {
     color: white;
-    margin-left: 20px;
+    margin-left: 32px;
     font-weight: 500;
 }
 
@@ -213,7 +220,7 @@ h1, h2, h3 {
     position: relative;
     z-index: 2;
     text-align: center;
-    max-width: 800px;
+    max-width: 1000px;
     padding: 0 20px;
     width: 100%;
 }
@@ -225,7 +232,6 @@ h1, h2, h3 {
     font-family: 'Inter', 'Noto Sans', sans-serif;
     margin-bottom: 16px;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    white-space: nowrap;
 }
 
 .hero-subtitle {

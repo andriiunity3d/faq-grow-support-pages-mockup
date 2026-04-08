@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
             controls.innerHTML = `
                 <a href="https://support-ads.unity.com/s/ContactUs" class="btn-submit">Submit a request</a>
                 <a href="${urlPath}my-requests.html" class="btn-submit">My Requests</a>
-                <div class="user-menu" style="display: inline-block; position: relative; margin-left: 15px; vertical-align: middle;">
+                <div class="user-menu" style="display: inline-block; position: relative; vertical-align: middle;">
                     <div class="user-icon" style="width: 30px; height: 30px; border-radius: 50%; background-color: #007bff; cursor: pointer; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 14px;">U</div>
                     <div class="dropdown-content" style="display: none; position: absolute; right: 0; background-color: #fff; color: #333; min-width: 160px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 10; border-radius: 5px;">
                         <a href="#" id="sign-out-btn" style="color: black; padding: 12px 16px; text-decoration: none; display: block;">Sign out</a>
