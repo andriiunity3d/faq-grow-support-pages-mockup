@@ -6,22 +6,18 @@
     <title>Article Page - Unity Support</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
-
-<!-- Intercom script for user support -->
-<script>
-  window.intercomSettings = {
-    api_base: "https://api-iam.intercom.io",
-    app_id: "s0c7oq3q",
-  };
-</script>
-
-
-<script>
-  // We pre-filled your app ID in the widget URL: 'https://widget.intercom.io/widget/s0c7oq3q'
-  (function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',w.intercomSettings);}else{var d=document;var i=function(){i.c(arguments);};i.q=[];i.c=function(args){i.q.push(args);};w.Intercom=i;var l=function(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/s0c7oq3q';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);};if(document.readyState==='complete'){l();}else if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();
-</script>
-
 <body>
+    <script>
+      window.intercomSettings = {
+        api_base: "https://api-iam.intercom.io",
+        app_id: "s0c7oq3q",
+      };
+    </script>
+    <script>
+      (function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',w.intercomSettings);}else{var d=document;var i=function(){i.c(arguments);};i.q=[];i.c=function(args){i.q.push(args);};w.Intercom=i;var l=function(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/s0c7oq3q';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);};if(document.readyState==='complete'){l();}else if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();
+    </script>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <header class="unity-header">
         <div class="unity-header-container">
             <a href="../index.html" class="unity-logo-link">
@@ -34,7 +30,7 @@
     </header>
 
     <div class="main-container page-container">
-        <aside class="sidebar">
+        <aside class="sidebar" aria-label="Related articles">
             <h3>Articles in this section</h3>
             <ul>
                 <li><a href="#">How to Sign Out of Your Unity Account</a></li>
@@ -52,13 +48,14 @@
             </ul>
         </aside>
 
-        <main class="main-content">
+        <main class="main-content" id="main-content">
             <div class="breadcrumbs" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                <div>
+                <nav aria-label="Breadcrumb">
                     <a href="../index.html">Support Home</a> &gt; <a href="#">Accounts</a>
-                </div>
-                <div class="search-bar" style="width: 300px;">
-                    <input type="text" placeholder="Search for answers..." style="width: 100%; padding: 8px 15px; border: 1px solid #ccc; border-radius: 5px; font-size: 0.9em;">
+                </nav>
+                <div class="search-bar" role="search" style="width: 300px;">
+                    <label for="article-search" class="sr-only">Search for answers</label>
+                    <input type="text" id="article-search" placeholder="Search for answers..." style="width: 100%; padding: 8px 15px; border: 1px solid #ccc; border-radius: 5px; font-size: 0.9em;">
                 </div>
             </div>
             
@@ -73,10 +70,12 @@
                 </div>
             </article>
 
-            <section class="helpful-section">
-                <p>Was this article helpful?</p>
-                <button id="yes-btn">Yes</button>
-                <button id="no-btn">No</button>
+            <section class="helpful-section" aria-label="Article feedback">
+                <p id="helpful-question">Was this article helpful?</p>
+                <div role="group" aria-labelledby="helpful-question">
+                    <button id="yes-btn" aria-label="Yes, this article was helpful">Yes</button>
+                    <button id="no-btn" aria-label="No, this article was not helpful">No</button>
+                </div>
                 <p><small><span id="helpful-count">0</span> found this article helpful</small></p>
             </section>
 
@@ -90,12 +89,13 @@
         <p>&copy; 2025 Unity Technologies</p>
     </footer>
     
-    <div id="feedback-modal" class="modal">
+    <div id="feedback-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="feedback-modal-title">
         <div class="modal-content">
-            <span class="close-button">&times;</span>
-            <h2>What was wrong with this article?</h2>
-            <textarea placeholder="Your feedback helps us improve our support resources..."></textarea>
-            <button>Submit Feedback</button>
+            <button class="close-button" aria-label="Close feedback dialog">&times;</button>
+            <h2 id="feedback-modal-title">What was wrong with this article?</h2>
+            <label for="feedback-text" class="sr-only">Your feedback</label>
+            <textarea id="feedback-text" placeholder="Your feedback helps us improve our support resources..."></textarea>
+            <button type="submit">Submit Feedback</button>
         </div>
     </div>
 

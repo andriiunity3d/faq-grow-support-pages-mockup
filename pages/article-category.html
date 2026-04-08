@@ -6,22 +6,18 @@
     <title>Mediation - Unity Support</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
-
-<!-- Intercom script for user support -->
-<script>
-  window.intercomSettings = {
-    api_base: "https://api-iam.intercom.io",
-    app_id: "s0c7oq3q",
-  };
-</script>
-
-
-<script>
-  // We pre-filled your app ID in the widget URL: 'https://widget.intercom.io/widget/s0c7oq3q'
-  (function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',w.intercomSettings);}else{var d=document;var i=function(){i.c(arguments);};i.q=[];i.c=function(args){i.q.push(args);};w.Intercom=i;var l=function(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/s0c7oq3q';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);};if(document.readyState==='complete'){l();}else if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();
-</script>
-
 <body>
+    <script>
+      window.intercomSettings = {
+        api_base: "https://api-iam.intercom.io",
+        app_id: "s0c7oq3q",
+      };
+    </script>
+    <script>
+      (function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',w.intercomSettings);}else{var d=document;var i=function(){i.c(arguments);};i.q=[];i.c=function(args){i.q.push(args);};w.Intercom=i;var l=function(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/s0c7oq3q';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);};if(document.readyState==='complete'){l();}else if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();
+    </script>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <header class="unity-header">
         <div class="unity-header-container">
             <a href="../index.html" class="unity-logo-link">
@@ -34,26 +30,32 @@
     </header>
 
     <div class="main-container">
-        <main class="main-content" style="width: 100%;">
-            <div class="breadcrumbs">
+        <main class="main-content" id="main-content" style="width: 100%;">
+            <nav aria-label="Breadcrumb" class="breadcrumbs">
                 <a href="../index.html">Support Home</a> &gt; Mediation
-            </div>
+            </nav>
             
             <header class="article-header">
                 <h1>Mediation</h1>
                 <p>Articles and guides for the Mediation solution.</p>
             </header>
 
-            <div class="search-bar" style="margin-bottom: 40px;">
-                <input type="text" placeholder="Search within this category...">
+            <div class="search-bar" role="search" style="margin-bottom: 40px;">
+                <label for="category-search" class="sr-only">Search within this category</label>
+                <input type="text" id="category-search" placeholder="Search within this category...">
             </div>
 
             <div class="collapsible-section">
                 <div class="section-header">
-                    <h3><a href="section-articles.html?category=Mediation&amp;section=General%20%26%20Account" class="section-link" style="color: inherit; text-decoration: none;">General & Account</a></h3>
-                    <span class="toggle-btn">+</span>
+                    <h3>
+                        <a href="section-articles.html?category=Mediation&amp;section=General%20%26%20Account" class="section-link" style="color: inherit; text-decoration: none;">General &amp; Account</a>
+                    </h3>
+                    <button class="section-toggle" aria-expanded="false" aria-controls="section-general">
+                        <span class="sr-only">Toggle General &amp; Account section</span>
+                        <span class="toggle-btn" aria-hidden="true">+</span>
+                    </button>
                 </div>
-                <div class="section-content">
+                <div class="section-content" id="section-general">
                     <ul>
                         <li><a href="article.html?id=4">Mediation Account Security</a></li>
                         <li><a href="#">Managing User Permissions</a></li>
@@ -67,10 +69,15 @@
 
             <div class="collapsible-section">
                 <div class="section-header">
-                    <h3><a href="section-articles.html?category=Mediation&section=Platform" class="section-link" style="color: inherit; text-decoration: none;">Platform</a></h3>
-                    <span class="toggle-btn">+</span>
+                    <h3>
+                        <a href="section-articles.html?category=Mediation&amp;section=Platform" class="section-link" style="color: inherit; text-decoration: none;">Platform</a>
+                    </h3>
+                    <button class="section-toggle" aria-expanded="false" aria-controls="section-platform">
+                        <span class="sr-only">Toggle Platform section</span>
+                        <span class="toggle-btn" aria-hidden="true">+</span>
+                    </button>
                 </div>
-                <div class="section-content">
+                <div class="section-content" id="section-platform">
                      <ul>
                         <li><a href="article.html?id=2">How to Add Ad Sources</a></li>
                         <li><a href="article.html?id=3">Understanding Mediation Groups</a></li>
@@ -78,16 +85,21 @@
                         <li><a href="#">Using the Reporting Dashboard</a></li>
                         <li><a href="#">Setting Up Ad Units</a></li>
                     </ul>
-                    <a href="section-articles.html?category=Mediation&section=Platform" class="see-all-link">See all 15 articles</a>
+                    <a href="section-articles.html?category=Mediation&amp;section=Platform" class="see-all-link">See all 15 articles</a>
                 </div>
             </div>
 
             <div class="collapsible-section">
                 <div class="section-header">
-                    <h3><a href="section-articles.html?category=Mediation&section=SDK" class="section-link" style="color: inherit; text-decoration: none;">SDK</a></h3>
-                    <span class="toggle-btn">+</span>
+                    <h3>
+                        <a href="section-articles.html?category=Mediation&amp;section=SDK" class="section-link" style="color: inherit; text-decoration: none;">SDK</a>
+                    </h3>
+                    <button class="section-toggle" aria-expanded="false" aria-controls="section-sdk">
+                        <span class="sr-only">Toggle SDK section</span>
+                        <span class="toggle-btn" aria-hidden="true">+</span>
+                    </button>
                 </div>
-                <div class="section-content">
+                <div class="section-content" id="section-sdk">
                     <ul>
                         <li><a href="article.html?id=1">Getting Started with Mediation</a></li>
                         <li><a href="article.html?id=5">Advanced SDK Features</a></li>
@@ -95,7 +107,7 @@
                         <li><a href="#">iOS Integration Guide</a></li>
                         <li><a href="#">Android Integration Guide</a></li>
                     </ul>
-                    <a href="section-articles.html?category=Mediation&section=SDK" class="see-all-link">See all 12 articles</a>
+                    <a href="section-articles.html?category=Mediation&amp;section=SDK" class="see-all-link">See all 12 articles</a>
                 </div>
             </div>
         </main>

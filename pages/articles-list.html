@@ -6,22 +6,18 @@
     <title>Articles List - Unity Support</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
-
-<!-- Intercom script for user support -->
-<script>
-  window.intercomSettings = {
-    api_base: "https://api-iam.intercom.io",
-    app_id: "s0c7oq3q",
-  };
-</script>
-
-
-<script>
-  // We pre-filled your app ID in the widget URL: 'https://widget.intercom.io/widget/s0c7oq3q'
-  (function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',w.intercomSettings);}else{var d=document;var i=function(){i.c(arguments);};i.q=[];i.c=function(args){i.q.push(args);};w.Intercom=i;var l=function(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/s0c7oq3q';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);};if(document.readyState==='complete'){l();}else if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();
-</script>
-
 <body>
+    <script>
+      window.intercomSettings = {
+        api_base: "https://api-iam.intercom.io",
+        app_id: "s0c7oq3q",
+      };
+    </script>
+    <script>
+      (function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',w.intercomSettings);}else{var d=document;var i=function(){i.c(arguments);};i.q=[];i.c=function(args){i.q.push(args);};w.Intercom=i;var l=function(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/s0c7oq3q';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);};if(document.readyState==='complete'){l();}else if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();
+    </script>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <header class="unity-header">
         <div class="unity-header-container">
             <a href="../index.html" class="unity-logo-link">
@@ -34,7 +30,7 @@
     </header>
 
     <div class="main-container page-container">
-        <aside class="sidebar">
+        <aside class="sidebar" aria-label="Categories">
             <h3>Monetization</h3>
             <ul>
                 <li><a href="#">Mediation</a></li>
@@ -51,10 +47,10 @@
             </ul>
         </aside>
 
-        <main class="main-content">
-            <div class="breadcrumbs">
+        <main class="main-content" id="main-content">
+            <nav aria-label="Breadcrumb" class="breadcrumbs">
                 <a href="../index.html">Support Home</a> &gt; <a href="article-category.html">Mediation</a> &gt; SDK
-            </div>
+            </nav>
             
             <header class="article-header">
                 <h1>SDK Articles</h1>

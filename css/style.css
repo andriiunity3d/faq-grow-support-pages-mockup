@@ -1,3 +1,35 @@
+/* --- Accessibility Utilities --- */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.skip-link {
+    position: absolute;
+    top: -100%;
+    left: 16px;
+    z-index: 10000;
+    padding: 12px 24px;
+    background: #007bff;
+    color: #fff;
+    font-weight: 600;
+    font-size: 16px;
+    text-decoration: none;
+    border-radius: 0 0 6px 6px;
+    transition: top 0.2s;
+}
+
+.skip-link:focus {
+    top: 0;
+}
+
 /* --- General Body & Typography --- */
 body {
     font-family: 'Inter', 'Noto Sans', sans-serif;
@@ -273,12 +305,22 @@ h1, h2, h3 {
     border: none;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    outline: none;
     transition: box-shadow 0.3s ease;
 }
 
 .search-input:focus {
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+    outline: 3px solid #005fcc;
+    outline-offset: 2px;
+}
+
+:focus-visible {
+    outline: 3px solid #005fcc;
+    outline-offset: 2px;
+}
+
+:focus:not(:focus-visible) {
+    outline: none;
 }
 
 .search-input::placeholder {
@@ -526,12 +568,32 @@ h1, h2, h3 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
-    cursor: pointer;
+    padding: 0;
     background-color: #f8f9fa;
 }
+
 .section-header h3 {
     margin: 0;
+    padding: 20px;
+    flex: 1;
+}
+
+.section-header .section-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font: inherit;
+    color: inherit;
+    flex-shrink: 0;
+}
+
+.section-header .section-toggle:focus-visible {
+    outline: 3px solid #005fcc;
+    outline-offset: -3px;
 }
 .toggle-btn {
     font-size: 2em;
@@ -676,6 +738,7 @@ footer {
 }
 .close-button {
     color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer;
+    background: none; border: none; padding: 0; line-height: 1;
 }
 .modal-content textarea {
     width: 100%; height: 100px; margin: 15px 0; padding: 10px; box-sizing: border-box; resize: vertical;
