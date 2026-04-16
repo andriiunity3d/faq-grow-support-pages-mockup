@@ -509,6 +509,67 @@ h1, h2, h3 {
     text-decoration: none;
 }
 
+.search-results-filters .search-filter-fieldset {
+    border: none;
+    margin: 0 0 1.25rem;
+    padding: 0;
+}
+
+.search-results-filters .search-filter-fieldset legend {
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+    padding: 0;
+}
+
+.search-results-filters .search-filter-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.search-results-filters .search-filter-option {
+    display: flex;
+    align-items: baseline;
+    gap: 0.35rem;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.search-results-filters .search-filter-count {
+    color: #888;
+    font-size: 0.85em;
+}
+
+.search-results-filters .search-filter-select {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    background: #fff;
+    box-sizing: border-box;
+}
+
+.search-results-filters .search-filter-clear {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: #f8f9fa;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.search-results-filters .search-filter-clear:hover {
+    background: #e9ecef;
+}
+
+.search-results-empty {
+    color: #666;
+    padding: 1rem 0;
+}
+
 
 /* --- Article Page Specifics --- */
 .article-header h1 {
