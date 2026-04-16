@@ -400,4 +400,239 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // --- Search results page (filters + dynamic list) ---
+    if (document.body.classList.contains('page-search-results')) {
+        const filtersRoot = document.getElementById('search-results-filters');
+        const listRoot = document.getElementById('search-results-article-list');
+        const headingEl = document.getElementById('search-results-heading');
+        const searchInput = document.getElementById('search-results-input');
+
+        function matchesQuery(article, q) {
+            const s = (q || '').trim().toLowerCase();
+            if (!s) return true;
+            return article.title.toLowerCase().includes(s) || article.content.toLowerCase().includes(s);
+        }
+
+        function productsForDepartment(department) {
+            if (department === 'Monetization') return [...SUPPORT_TAXONOMY.supplyProducts];
+            if (department === 'User Acquisition') return [...SUPPORT_TAXONOMY.demandProducts];
+            return [...SUPPORT_TAXONOMY.supplyProducts, ...SUPPORT_TAXONOMY.demandProducts];
+        }
+
+        function readState() {
+            const params = new URLSearchParams(window.location.search);
+            let q = (params.get('q') || '').trim();
+            let department = params.get('department') || '';
+            if (department === 'Supply') department = 'Monetization';
+            if (department === 'Demand') department = 'User Acquisition';
+            if (department && !SUPPORT_TAXONOMY.departments.includes(department)) {
+                department = '';
+            }
+            let product = params.get('product') || '';
+            const rawCats = params.getAll('category').filter(Boolean);
+            const categories = rawCats.filter((c) => SUPPORT_TAXONOMY.supportCategories.includes(c));
+            const allowedProducts = productsForDepartment(department);
+            if (product && !allowedProducts.includes(product)) {
+                product = '';
+            }
+            return { q, department, product, categories };
+        }
+
+        function writeState(state) {
+            const params = new URLSearchParams();
+            const qTrim = (state.q || '').trim();
+            if (qTrim) params.set('q', qTrim);
+            if (state.department) params.set('department', state.department);
+            if (state.product) params.set('product', state.product);
+            state.categories.forEach((c) => params.append('category', c));
+            const path = window.location.pathname;
+            const qs = params.toString();
+            window.history.replaceState({}, '', qs ? `${path}?${qs}` : path);
+        }
+
+        function countBy(list, predicate) {
+            return list.filter(predicate).length;
+        }
+
+        function renderFilters(state, textMatched) {
+            const dept = state.department;
+            const productOptions = productsForDepartment(dept);
+
+            const deptRadios = SUPPORT_TAXONOMY.departments.map((d) => {
+                const n = countBy(textMatched, (a) => a.department === d);
+                const id = `filter-dept-${d.replace(/\s+/g, '-')}`;
+                return `<label class="search-filter-option" for="${id}"><input type="radio" name="filter-department" id="${id}" value="${d.replace(/"/g, '&quot;')}" ${state.department === d ? 'checked' : ''}> ${d} <span class="search-filter-count">(${n})</span></label>`;
+            }).join('');
+
+            const anyDeptId = 'filter-dept-any';
+            const productSelectOptions = ['<option value="">Any product</option>']
+                .concat(
+                    productOptions.map((p) => {
+                        const pool = dept ? textMatched.filter((a) => a.department === dept) : textMatched;
+                        const n = countBy(pool, (a) => a.product === p);
+                        return `<option value="${p.replace(/"/g, '&quot;')}" ${state.product === p ? 'selected' : ''}>${p} (${n})</option>`;
+                    })
+                )
+                .join('');
+
+            const categoryChecks = SUPPORT_TAXONOMY.supportCategories.map((c) => {
+                const id = `filter-cat-${c.replace(/[^a-zA-Z0-9]/g, '-')}`;
+                const n = countBy(textMatched, (a) => a.supportCategory === c);
+                const checked = state.categories.includes(c) ? 'checked' : '';
+                return `<label class="search-filter-option" for="${id}"><input type="checkbox" name="filter-category" id="${id}" value="${c.replace(/"/g, '&quot;')}" ${checked}> ${c} <span class="search-filter-count">(${n})</span></label>`;
+            }).join('');
+
+            filtersRoot.innerHTML = `
+                <h3>Filters</h3>
+                <fieldset class="search-filter-fieldset">
+                    <legend>Business Department</legend>
+                    <div class="search-filter-stack">
+                        <label class="search-filter-option" for="${anyDeptId}">
+                            <input type="radio" name="filter-department" id="${anyDeptId}" value="" ${!state.department ? 'checked' : ''}> Any
+                            <span class="search-filter-count">(${textMatched.length})</span>
+                        </label>
+                        ${deptRadios}
+                    </div>
+                </fieldset>
+                <fieldset class="search-filter-fieldset">
+                    <legend>Product</legend>
+                    <label for="filter-product-select" class="sr-only">Product</label>
+                    <select id="filter-product-select" class="search-filter-select">${productSelectOptions}</select>
+                </fieldset>
+                <fieldset class="search-filter-fieldset">
+                    <legend>Category</legend>
+                    <div class="search-filter-stack">${categoryChecks}</div>
+                </fieldset>
+                <button type="button" class="search-filter-clear" id="search-filter-clear">Clear filters</button>
+            `;
+
+            filtersRoot.querySelectorAll('input[name="filter-department"]').forEach((el) => {
+                el.addEventListener('change', () => {
+                    const next = readState();
+                    next.q = searchInput ? searchInput.value : next.q;
+                    next.department = filtersRoot.querySelector('input[name="filter-department"]:checked')?.value || '';
+                    const allowed = productsForDepartment(next.department);
+                    if (next.product && !allowed.includes(next.product)) next.product = '';
+                    next.categories = Array.from(filtersRoot.querySelectorAll('input[name="filter-category"]:checked')).map((x) => x.value);
+                    writeState(next);
+                    refresh();
+                });
+            });
+
+            const productSelect = document.getElementById('filter-product-select');
+            productSelect.addEventListener('change', () => {
+                const next = readState();
+                next.q = searchInput ? searchInput.value : next.q;
+                next.department = filtersRoot.querySelector('input[name="filter-department"]:checked')?.value || '';
+                next.product = productSelect.value || '';
+                next.categories = Array.from(filtersRoot.querySelectorAll('input[name="filter-category"]:checked')).map((x) => x.value);
+                writeState(next);
+                refresh();
+            });
+
+            filtersRoot.querySelectorAll('input[name="filter-category"]').forEach((el) => {
+                el.addEventListener('change', () => {
+                    const next = readState();
+                    next.q = searchInput ? searchInput.value : next.q;
+                    next.department = filtersRoot.querySelector('input[name="filter-department"]:checked')?.value || '';
+                    next.product = document.getElementById('filter-product-select').value || '';
+                    next.categories = Array.from(filtersRoot.querySelectorAll('input[name="filter-category"]:checked')).map((x) => x.value);
+                    writeState(next);
+                    refresh();
+                });
+            });
+
+            document.getElementById('search-filter-clear').addEventListener('click', () => {
+                const next = { q: searchInput ? searchInput.value : readState().q, department: '', product: '', categories: [] };
+                writeState(next);
+                refresh();
+            });
+        }
+
+        function applyTaxonomyFilters(list, state) {
+            let out = list;
+            if (state.department) {
+                out = out.filter((a) => a.department === state.department);
+            }
+            if (state.product) {
+                out = out.filter((a) => a.product === state.product);
+            }
+            if (state.categories.length > 0) {
+                out = out.filter((a) => state.categories.includes(a.supportCategory));
+            }
+            return out;
+        }
+
+        function escapeHtml(str) {
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
+        }
+
+        function snippet(text, q, maxLen) {
+            const lower = text.toLowerCase();
+            const idx = q ? lower.indexOf(q.toLowerCase()) : -1;
+            let chunk = text;
+            if (idx >= 0) {
+                const start = Math.max(0, idx - 40);
+                chunk = (start > 0 ? '…' : '') + text.slice(start, idx + maxLen);
+            } else {
+                chunk = text.slice(0, maxLen);
+            }
+            if (text.length > chunk.length) chunk += '…';
+            return chunk;
+        }
+
+        function refresh() {
+            const state = readState();
+            if (searchInput && searchInput.value !== state.q) searchInput.value = state.q;
+
+            const textMatched = articles.filter((a) => matchesQuery(a, state.q));
+            renderFilters(state, textMatched);
+            const filtered = applyTaxonomyFilters(textMatched, state);
+
+            const qLabel = state.q.trim() ? `'${state.q}'` : 'all articles';
+            headingEl.textContent = `${filtered.length} result${filtered.length !== 1 ? 's' : ''} for ${qLabel}`;
+
+            if (filtered.length === 0) {
+                listRoot.innerHTML = '<p class="search-results-empty">No articles match your search and filters.</p>';
+                return;
+            }
+
+            listRoot.innerHTML = filtered
+                .map((article) => {
+                    const desc = snippet(article.content, state.q, 160);
+                    const safeDesc = escapeHtml(desc);
+                    const qTrim = (state.q || '').trim();
+                    const boldQ = qTrim
+                        ? safeDesc.replace(new RegExp(qTrim.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi'), (m) => `<b>${m}</b>`)
+                        : safeDesc;
+                    return `
+                <div class="article-list-item">
+                    <h3><a href="article.html?id=${article.id}">${escapeHtml(article.title)}</a></h3>
+                    <p>${boldQ}</p>
+                    <div class="article-meta">Likes: ${article.likes} | Updated on ${escapeHtml(article.updated)}</div>
+                </div>`;
+                })
+                .join('');
+        }
+
+        if (searchInput) {
+            searchInput.value = readState().q;
+            searchInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    const next = readState();
+                    next.q = searchInput.value.trim();
+                    writeState(next);
+                    refresh();
+                }
+            });
+        }
+
+        refresh();
+    }
 });
