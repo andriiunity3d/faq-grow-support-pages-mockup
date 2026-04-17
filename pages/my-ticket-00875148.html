@@ -3,19 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search Results - Unity Support</title>
+    <title>00875148 — Tapjoy Offerwall not displaying correctly on iOS | Unity Support</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
 </head>
-<body class="page-search-results">
-    <script>
-      window.intercomSettings = {
-        api_base: "https://api-iam.intercom.io",
-        app_id: "s0c7oq3q",
-      };
-    </script>
-    <script>
-      (function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',w.intercomSettings);}else{var d=document;var i=function(){i.c(arguments);};i.q=[];i.c=function(args){i.q.push(args);};w.Intercom=i;var l=function(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/s0c7oq3q';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);};if(document.readyState==='complete'){l();}else if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();
-    </script>
+<body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
     <header class="unity-header">
@@ -23,44 +17,117 @@
             <a href="../index.html" class="unity-logo-link">
                 <img src="../images/unity-logo.svg" alt="Support logo" class="unity-logo">
             </a>
-            <nav class="unity-nav">
-                <!-- User controls will be injected by JavaScript -->
-            </nav>
+            <nav class="unity-nav"></nav>
         </div>
     </header>
 
-    <div class="main-container page-container">
-        <aside class="sidebar search-results-filters" id="search-results-filters" aria-label="Filter options">
-            <!-- Filled by main.js: Business Department, Product, Category -->
-        </aside>
+    <main class="main-container ticket-page" id="main-content">
+        <nav class="request-breadcrumbs" aria-label="Breadcrumb">
+            <ol class="breadcrumbs">
+                <li><a href="../index.html">Support Home</a></li>
+                <li><a href="my-requests.html">My Requests</a></li>
+            </ol>
+        </nav>
 
-        <main class="main-content" id="main-content">
-            <div class="breadcrumbs" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                <nav aria-label="Breadcrumb">
-                    <a href="../index.html">Support Home</a> &gt; Search Results
-                </nav>
-                <div class="search-bar" role="search" style="width: 300px;">
-                    <label for="search-results-input" class="sr-only">Search for answers</label>
-                    <input type="text" id="search-results-input" placeholder="Search for answers..." style="width: 100%; padding: 8px 15px; border: 1px solid #ccc; border-radius: 5px; font-size: 0.9em;">
+        <h1 class="request-title">Tapjoy Offerwall not displaying correctly on iOS</h1>
+
+        <div class="request-layout">
+            <section class="request-main" aria-label="Conversation">
+                <ul class="comment-list">
+                    <li class="comment">
+                        <div class="comment-wrapper">
+                            <div class="comment-info">
+                                <div class="comment-author">
+                                    <div class="comment-avatar comment-avatar--agent" aria-hidden="true">A</div>
+                                    <div class="comment-meta">
+                                        <span class="comment-author-name">Andrii from Unity Support</span>
+                                        <time datetime="2025-11-08T13:00:00Z">08.11.2025, 13:00</time>
+                                    </div>
+                                </div>
+                                <section class="comment-body">
+                                    <p>Glad it’s working on your side now. I’ll mark this ticket solved — shout if anything regresses after the next SDK minor.</p>
+                                </section>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="comment">
+                        <div class="comment-wrapper">
+                            <div class="comment-info">
+                                <div class="comment-author">
+                                    <div class="comment-avatar comment-avatar--customer" aria-hidden="true">S</div>
+                                    <div class="comment-meta">
+                                        <span class="comment-author-name">Sam Okonkwo</span>
+                                        <time datetime="2025-11-07T17:20:00Z">07.11.2025, 17:20</time>
+                                    </div>
+                                </div>
+                                <section class="comment-body">
+                                    <p>That was it — we had skipped the SKAdNetwork entries for the newest bundle. After adding them and updating to Tapjoy 13.x, the wall loads again on iOS 18. Thanks Andrii!</p>
+                                </section>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="comment">
+                        <div class="comment-wrapper">
+                            <div class="comment-info">
+                                <div class="comment-author">
+                                    <div class="comment-avatar comment-avatar--agent" aria-hidden="true">A</div>
+                                    <div class="comment-meta">
+                                        <span class="comment-author-name">Andrii from Unity Support</span>
+                                        <time datetime="2025-11-06T10:30:00Z">06.11.2025, 10:30</time>
+                                    </div>
+                                </div>
+                                <section class="comment-body">
+                                    <p>Hi Sam — for a blank offerwall on iOS the first checks are SDK version, App Key/placement ID, and that your Info.plist includes the required SKAdNetwork IDs for Tapjoy and partners. Please confirm the SDK build from the startup log and share a screen recording if the spinner never resolves.</p>
+                                </section>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="comment">
+                        <div class="comment-wrapper">
+                            <div class="comment-info">
+                                <div class="comment-author">
+                                    <div class="comment-avatar comment-avatar--customer" aria-hidden="true">S</div>
+                                    <div class="comment-meta">
+                                        <span class="comment-author-name">Sam Okonkwo</span>
+                                        <time datetime="2025-11-05T11:00:00Z">05.11.2025, 11:00</time>
+                                    </div>
+                                </div>
+                                <section class="comment-body">
+                                    <p>Offerwall opens but shows an empty state on iPhone 15 Pro, iOS 18. Android is fine. We recently updated Xcode — not sure if related.</p>
+                                </section>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="request-follow-up">
+                    This request is closed for comments. You can <a href="https://support-ads.unity.com/s/ContactUs">create a follow-up</a>.
                 </div>
-            </div>
-            
-            <h2 id="search-results-heading">Search results</h2>
-
-            <div class="ai-answer-box">
-                <h3>AI Suggestion</h3>
-                <p>To integrate the SDK, you need to follow the steps in our official documentation, which includes adding the SDK to your project dependencies and initializing it in your main application class.</p>
-                <small>Based on: <a href="article.html?id=6">How to integrate the IronSource SDK</a></small>
-                <div class="feedback" role="group" aria-label="Rate this AI suggestion" style="margin-top: 10px;">
-                    <button style="padding: 5px 10px;" aria-label="Helpful suggestion"><span aria-hidden="true">👍</span></button>
-                    <button style="padding: 5px 10px;" aria-label="Not helpful suggestion"><span aria-hidden="true">👎</span></button>
-                </div>
-            </div>
-
-            <section class="article-list" id="search-results-article-list" aria-live="polite">
             </section>
-        </main>
-    </div>
+
+            <aside class="request-sidebar" aria-labelledby="ticket-details-title">
+                <h2 id="ticket-details-title">Ticket details</h2>
+                <dl class="request-details">
+                    <dt>Requester</dt>
+                    <dd>Sam Okonkwo</dd>
+                    <dt>Created</dt>
+                    <dd><time datetime="2025-11-05T11:00:00+00:00">05.11.2025, 11:00</time></dd>
+                    <dt>Last activity</dt>
+                    <dd><time datetime="2025-11-08T13:00:00+00:00">08.11.2025, 13:00</time></dd>
+                    <dt>Id</dt>
+                    <dd>#00875148</dd>
+                    <dt>Status</dt>
+                    <dd><span class="status-label status-label--closed">Closed</span></dd>
+                    <dt>Product Type</dt>
+                    <dd>Tapjoy</dd>
+                </dl>
+                <dl class="request-details request-details-attachments" aria-labelledby="ticket-attachments-heading">
+                    <dt id="ticket-attachments-heading">Attachments</dt>
+                    <dd><p class="ticket-attachments-empty">No attachments</p></dd>
+                </dl>
+            </aside>
+        </div>
+    </main>
 
     <footer class="footer">
       <div class="footer-inner">

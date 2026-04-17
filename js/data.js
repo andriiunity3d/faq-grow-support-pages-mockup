@@ -123,3 +123,67 @@ const articles = [
     { id: 91, category: 'iAds', section: 'General & Account', title: 'iAds User Roles and Permissions', likes: 88, views: 1520, updated: 'Dec 13, 2025', content: 'Assign roles in your iAds account: admins, campaign managers, and read-only users. Control who can spend budget or change ad units.' },
     { id: 92, category: 'iAds', section: 'General & Account', title: 'iAds Support and Documentation', likes: 90, views: 1580, updated: 'Dec 12, 2025', content: 'Access iAds documentation, API references, and support. Open a ticket for billing, integration, or campaign optimization help.' }
 ];
+
+// Support KB taxonomy (business department / product / category) — used for filters and metadata; not shown on article pages.
+const SUPPORT_TAXONOMY = {
+    departments: ['Monetization', 'User Acquisition'],
+    supplyProducts: ['Mediation', 'ironSource Ads', 'UnityAds', 'Tapjoy Offerwall', 'AdQuality'],
+    demandProducts: ['UnityAds User Acquisition', 'ironSource Ads Acquisition', 'Tapjoy User Acquisition'],
+    supportCategories: ['General&Account', 'Platform', 'SDK']
+};
+
+const SECTION_TO_SUPPORT_CATEGORY = {
+    'General & Account': 'General&Account',
+    'Platform': 'Platform',
+    'SDK': 'SDK'
+};
+
+function inferDepartmentAndProduct(article) {
+    const { id, category } = article;
+
+    if (id === 18) {
+        return { department: 'Monetization', product: 'AdQuality' };
+    }
+
+    if (category === 'Mediation') {
+        return { department: 'Monetization', product: 'Mediation' };
+    }
+
+    if (category === 'IronSource') {
+        if (id === 54 || id === 55) {
+            return { department: 'User Acquisition', product: 'ironSource Ads Acquisition' };
+        }
+        return { department: 'Monetization', product: 'ironSource Ads' };
+    }
+
+    if (category === 'UnityAds') {
+        if (id === 60) {
+            return { department: 'User Acquisition', product: 'UnityAds User Acquisition' };
+        }
+        return { department: 'Monetization', product: 'UnityAds' };
+    }
+
+    if (category === 'Tapjoy') {
+        return { department: 'Monetization', product: 'Tapjoy Offerwall' };
+    }
+
+    if (category === 'AdQuality') {
+        return { department: 'Monetization', product: 'AdQuality' };
+    }
+
+    if (category === 'iAds') {
+        if (id === 75) {
+            return { department: 'User Acquisition', product: 'ironSource Ads Acquisition' };
+        }
+        return { department: 'Monetization', product: 'ironSource Ads' };
+    }
+
+    return { department: 'Monetization', product: 'Mediation' };
+}
+
+articles.forEach((article) => {
+    const { department, product } = inferDepartmentAndProduct(article);
+    article.department = department;
+    article.product = product;
+    article.supportCategory = SECTION_TO_SUPPORT_CATEGORY[article.section] || 'General&Account';
+});
