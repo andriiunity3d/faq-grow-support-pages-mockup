@@ -1083,3 +1083,354 @@ footer.footer {
     text-decoration: underline;
     color: #0056b3;
 }
+
+/* --- My Ticket (request detail) — Zendesk-style layout --- */
+.my-activities-nav {
+    background: #f8f9fa;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 0;
+    margin-top: 0;
+}
+
+.my-activities-nav .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.collapsible-nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 12px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 24px;
+    align-items: center;
+}
+
+.collapsible-nav-list li {
+    margin: 0;
+    font-size: 0.95rem;
+    color: #555;
+}
+
+.collapsible-nav-list li[aria-current="page"],
+.collapsible-nav-list li.nav-current {
+    font-weight: 600;
+    color: #111;
+}
+
+.collapsible-nav-list a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.collapsible-nav-list a:hover {
+    text-decoration: underline;
+}
+
+.request-breadcrumbs {
+    margin-bottom: 16px;
+}
+
+.request-breadcrumbs .breadcrumbs {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    padding-left: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.request-breadcrumbs .breadcrumbs li {
+    display: inline;
+}
+
+.request-breadcrumbs .breadcrumbs li:not(:last-child)::after {
+    content: ">";
+    margin-left: 8px;
+    color: #999;
+}
+
+.request-title {
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: #111;
+    margin: 0 0 28px;
+    line-height: 1.3;
+}
+
+.ticket-page .request-layout {
+    display: grid;
+    grid-template-columns: 1fr minmax(260px, 320px);
+    gap: 32px;
+    align-items: start;
+}
+
+@media (max-width: 900px) {
+    .ticket-page .request-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+.request-main {
+    min-width: 0;
+}
+
+.comment-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.comment-list .comment {
+    border: 1px solid #e8e8e8;
+    border-radius: 6px;
+    margin-bottom: 16px;
+    background: #fff;
+    overflow: hidden;
+}
+
+.comment-wrapper {
+    padding: 0;
+}
+
+.comment-info {
+    padding: 16px 18px;
+}
+
+.comment-author {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.comment-avatar {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+.comment-avatar--agent {
+    background: linear-gradient(135deg, #007bff, #0056b3);
+}
+
+.comment-avatar--customer {
+    background: #6c757d;
+}
+
+.comment-meta {
+    flex: 1;
+    min-width: 0;
+}
+
+.comment-author-name {
+    display: block;
+    font-weight: 600;
+    color: #111;
+    font-size: 0.95rem;
+}
+
+.comment-meta time {
+    display: block;
+    font-size: 0.85rem;
+    color: #777;
+    margin-top: 2px;
+}
+
+.comment-body {
+    font-size: 0.95rem;
+    color: #333;
+    line-height: 1.6;
+}
+
+.comment-body p {
+    margin: 0 0 12px;
+}
+
+.comment-body p:last-child {
+    margin-bottom: 0;
+}
+
+.request-follow-up {
+    margin-top: 20px;
+    padding: 14px 16px;
+    background: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.request-sidebar {
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    background: #fafafa;
+    padding: 18px 20px;
+}
+
+.collapsible-sidebar-title,
+.request-sidebar h2 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0 0 16px;
+    color: #111;
+}
+
+.request-details {
+    margin: 0;
+}
+
+.request-details dt {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #666;
+    margin-top: 14px;
+    font-weight: 600;
+}
+
+.request-details dt:first-child {
+    margin-top: 0;
+}
+
+.request-details dd {
+    margin: 4px 0 0;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+.status-label {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-size: 0.85em;
+    font-weight: 600;
+    color: #fff;
+    background-color: #6c757d;
+}
+
+.status-label--open {
+    background-color: #6c757d;
+}
+
+.status-label--pending {
+    background-color: #fd7e14;
+}
+
+.status-label--closed,
+.status-label--solved {
+    background-color: #28a745;
+}
+
+/* Ticket details: attachments (sidebar) */
+.request-details-attachments {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.request-details-attachments dt {
+    margin-top: 0;
+}
+
+.ticket-attachments-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.ticket-attachments-list li {
+    margin-bottom: 12px;
+}
+
+.ticket-attachments-list li:last-child {
+    margin-bottom: 0;
+}
+
+.ticket-attachment-link {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    text-decoration: none;
+    color: #333;
+    font-size: 0.88rem;
+    line-height: 1.4;
+}
+
+.ticket-attachment-link:hover {
+    color: #007bff;
+}
+
+.ticket-attachment-link:hover .ticket-attachment-thumb {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.ticket-attachment-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.ticket-attachment-name {
+    font-weight: 500;
+    word-break: break-word;
+}
+
+.ticket-attachment-thumb {
+    flex-shrink: 0;
+    width: 72px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid #e0e0e0;
+    background: #f0f0f0;
+}
+
+.ticket-attachment-meta {
+    display: block;
+    font-size: 0.8rem;
+    color: #777;
+    margin-top: 2px;
+}
+
+.ticket-attachments-empty {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #777;
+}
+
+/* Inline image in ticket comment */
+.comment-attachment {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid #eee;
+}
+
+.comment-attachment img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px;
+    border: 1px solid #e0e0e0;
+    display: block;
+}
+
+.comment-attachment figcaption {
+    margin-top: 8px;
+    font-size: 0.85rem;
+    color: #666;
+}
