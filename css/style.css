@@ -1265,6 +1265,23 @@ footer.footer {
     margin-bottom: 0;
 }
 
+.comment-body .comment-signature {
+    margin-top: 14px;
+}
+
+.comment-signature-name {
+    margin: 0;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #333;
+}
+
+.comment-signature-role {
+    margin: 4px 0 0;
+    font-size: 0.85rem;
+    color: #555;
+}
+
 .request-follow-up {
     margin-top: 20px;
     padding: 14px 16px;
