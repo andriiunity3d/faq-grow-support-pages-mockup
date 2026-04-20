@@ -1164,6 +1164,113 @@ footer.footer {
     line-height: 1.3;
 }
 
+.request-title-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 28px;
+}
+
+.request-title-row .request-title {
+    margin: 0;
+    flex: 1 1 220px;
+}
+
+.btn-close-request {
+    flex-shrink: 0;
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 8px 18px;
+    border: 1px solid #333;
+    border-radius: 6px;
+    background: #fff;
+    color: #111;
+    cursor: pointer;
+    line-height: 1.3;
+}
+
+.btn-close-request:hover {
+    background: #f3f3f3;
+}
+
+.btn-close-request:focus-visible {
+    outline: 2px solid #1264a3;
+    outline-offset: 2px;
+}
+
+/* CSAT (ticket sidebar) */
+.ticket-csat {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.ticket-csat-heading {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #111;
+    margin: 0 0 14px;
+    line-height: 1.35;
+}
+
+.ticket-csat-options {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 4px;
+}
+
+.ticket-csat-options li {
+    flex: 1 1 0;
+    min-width: 0;
+}
+
+.ticket-csat-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 6px;
+    width: 100%;
+    padding: 8px 2px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-family: inherit;
+    border-radius: 6px;
+    color: inherit;
+}
+
+.ticket-csat-option:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.ticket-csat-option:focus-visible {
+    outline: 2px solid #1264a3;
+    outline-offset: 1px;
+}
+
+.ticket-csat-emoji {
+    font-size: 1.65rem;
+    line-height: 1;
+}
+
+.ticket-csat-label {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 400;
+    color: #333;
+    text-align: center;
+    line-height: 1.25;
+}
+
 .ticket-page .request-layout {
     display: grid;
     grid-template-columns: 1fr minmax(260px, 320px);
@@ -1174,6 +1281,17 @@ footer.footer {
 @media (max-width: 900px) {
     .ticket-page .request-layout {
         grid-template-columns: 1fr;
+    }
+
+    .ticket-csat-options {
+        flex-wrap: wrap;
+        justify-content: center;
+        row-gap: 10px;
+    }
+
+    .ticket-csat-options li {
+        flex: 1 1 calc(33.33% - 8px);
+        max-width: 120px;
     }
 }
 
