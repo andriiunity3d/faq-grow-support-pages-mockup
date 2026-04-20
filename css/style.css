@@ -1188,11 +1188,16 @@ footer.footer {
 }
 
 .comment-list .comment {
-    border: 1px solid #e8e8e8;
-    border-radius: 6px;
-    margin-bottom: 16px;
-    background: #fff;
-    overflow: hidden;
+    border: none;
+    border-radius: 0;
+    margin: 0;
+    background: transparent;
+    border-bottom: 1px solid #e0e0e0;
+    overflow: visible;
+}
+
+.comment-list .comment:last-child {
+    border-bottom: none;
 }
 
 .comment-wrapper {
@@ -1200,14 +1205,14 @@ footer.footer {
 }
 
 .comment-info {
-    padding: 16px 18px;
+    padding: 16px 0;
 }
 
 .comment-author {
     display: flex;
     align-items: flex-start;
     gap: 12px;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
 }
 
 .comment-avatar {
@@ -1238,17 +1243,21 @@ footer.footer {
 }
 
 .comment-author-name {
-    display: block;
+    display: inline;
     font-weight: 600;
-    color: #111;
+    color: #1264a3;
     font-size: 0.95rem;
 }
 
 .comment-meta time {
-    display: block;
+    display: inline;
     font-size: 0.85rem;
-    color: #777;
-    margin-top: 2px;
+    color: #616061;
+    margin-left: 8px;
+}
+
+.comment-info > .comment-body {
+    padding-left: calc(40px + 12px);
 }
 
 .comment-body {
@@ -1332,25 +1341,30 @@ footer.footer {
 
 .status-label {
     display: inline-block;
-    padding: 5px 10px;
-    border-radius: 3px;
+    padding: 4px 10px;
+    border-radius: 999px;
     font-size: 0.85em;
     font-weight: 600;
     color: #fff;
     background-color: #6c757d;
 }
 
+/* Open (waiting for support / needs agent) */
+.status-label--waiting-support,
 .status-label--open {
-    background-color: #6c757d;
+    background-color: #d32f2f;
 }
 
+/* Pending (waiting for customer response) */
+.status-label--waiting-customer,
 .status-label--pending {
-    background-color: #fd7e14;
+    background-color: #1264a3;
 }
 
+/* Closed / solved */
 .status-label--closed,
 .status-label--solved {
-    background-color: #28a745;
+    background-color: #5e5e5e;
 }
 
 /* Ticket details: attachments (sidebar) */
